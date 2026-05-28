@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SheRise - Career Plan</title>
+    <!-- Tailwind CSS v4 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FFF9F8;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased">
+
+    <!-- SECTION: cp-navbar -->
+    <nav id="cp-navbar" class="bg-white border-b border-rose-100 py-4 px-6 md:px-16 flex justify-between items-center sticky top-0 z-50 shadow-xs">
+        <div class="text-2xl font-extrabold text-[#8B1E34] tracking-tight">SheRise</div>
+        <div class="hidden md:flex space-x-8 font-semibold text-gray-500 text-sm">
+            <a href="#" class="hover:text-[#8B1E34] transition">Home</a>
+            <a href="#" class="hover:text-[#8B1E34] transition">Girls Spot</a>
+            <a href="#" class="hover:text-[#8B1E34] transition">My Record</a>
+            <a href="#" class="text-[#8B1E34] border-b-2 border-[#8B1E34] pb-1">Career Plan</a>
+        </div>
+        <button class="btn-cp-login bg-[#8B1E34] text-white px-7 py-2 rounded-full font-bold text-sm hover:bg-[#6B1525] transition shadow-xs cursor-pointer">
+            Login
+        </button>
+    </nav>
+
+    <!-- SECTION: cp-hero -->
+    <section id="cp-hero" class="py-10 px-4 md:px-16 flex flex-col items-center text-center max-w-5xl mx-auto">
+        <!-- Top Illustration Banner -->
+        <div class="w-full mb-8">
+            <img src="assets/images/img_cp_header_01.png" alt="SheRise Career Avatar Row 1" class="w-full object-contain">
+        </div>
+        
+        <!-- Hero Title -->
+        <h1 class="text-4xl md:text-5xl font-extrabold text-[#8B1E34] leading-tight max-w-2xl my-4">
+            Chart Your<br>Professional Career<span class="text-gray-900">.</span>
+        </h1>
+        
+        <!-- Bottom Illustration Banner -->
+        <div class="w-full mt-8 mb-4">
+            <img src="assets/images/img_cp_header_02.png" alt="SheRise Career Avatar Row 2" class="w-full object-contain">
+        </div>
+    </section>
+
+    <!-- SECTION: cp-partners -->
+    <section id="cp-partners" class="bg-[#8B1E34] py-6 px-6 md:px-16 text-white">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-xl font-bold tracking-tight text-center md:text-left leading-tight">
+                Our<br class="hidden md:block">Partners
+            </div>
+            <!-- Partner Logos Container -->
+            <div class="flex flex-wrap justify-center items-center gap-6 md:gap-8">
+                <div class="bg-white p-2 rounded-xl shadow-xs flex items-center justify-center h-14 w-28 md:w-32">
+                    <a href="https://sheandclub.id/" target="_blank" rel="noopener noreferrer" class="w-full h-full flex items-center justify-center">
+                        <img src="assets/logos/logo_cp_sheclub.png" alt="She & Co Club Logo" class="max-h-full max-w-full object-contain">
+                    </a>
+                </div>
+                <div class="bg-white p-2 rounded-xl shadow-xs flex items-center justify-center h-14 w-36 md:w-40">
+                    <a href="https://www.peakxv.com/" target="_blank" rel="noopener noreferrer" class="w-full h-full flex items-center justify-center">
+                        <img src="assets/logos/logo_cp_peakxv.png" alt="Peak XV Logo" class="max-h-full max-w-full object-contain">
+                    </a>
+                </div>
+                <div class="bg-white p-2 rounded-xl shadow-xs flex items-center justify-center h-14 w-44 md:w-48">
+                    <a href="https://www.gofundme.org/girls-opportunity-alliance/" target="_blank" rel="noopener noreferrer" class="w-full h-full flex items-center justify-center">
+                        <img src="assets/logos/logo_cp_goa.png" alt="Girls Opportunity Alliance Logo" class="max-h-full max-w-full object-contain">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: cp-opportunities -->
+    <section id="cp-opportunities" class="py-14 px-4 md:px-16 max-w-6xl mx-auto">
+        
+        <!-- Floating Section Header Badge -->
+        <div class="flex justify-center items-center space-x-3 mb-12">
+            <span class="text-xl">💝</span>
+            <span class="text-xl">👩🏻‍💼</span>
+            <div class="bg-[#6B1D2F] text-white px-8 py-3 rounded-full font-bold text-md md:text-lg tracking-wide shadow-md">
+                Opportunities Ahead
+            </div>
+            <span class="text-xl">👩🏾‍🦱</span>
+            <span class="text-xl">🏆</span>
+        </div>
+
+        <!-- Opportunities Grid Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            
+            <!-- LEFT COLUMN: Scholarships Layout -->
+            <div class="space-y-6">
+                <!-- Scholarship Card 1 -->
+                <div class="bg-white p-5 rounded-2xl shadow-xs border border-rose-50 flex flex-col sm:flex-row gap-5">
+                    <div class="w-full sm:w-44 h-40 shrink-0 bg-rose-50 rounded-xl overflow-hidden">
+                        <img src="assets/images/img_cp_aws.png" alt="Scholarship Workspace" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex flex-col justify-between w-full">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="bg-rose-100 text-[#8B1E34] text-[10px] font-bold px-2.5 py-1 rounded-md tracking-wider uppercase">Featured Scholarship</span>
+                                <span class="text-rose-500 text-xs font-semibold flex items-center">
+                                    <span class="mr-1">⏳</span> Due: Oct 25
+                                </span>
+                            </div>
+                            <h3 class="font-bold text-gray-900 text-base leading-snug mb-2">AWS AI Academy</h3>
+                            <p class="text-gray-500 text-xs leading-relaxed">Fully funded opportunity for aspiring female software engineers to study at premier institutions across Europe.</p>
+                        </div>
+                        <div class="mt-4 sm:mt-0">
+                            <a href="https://aws.dicoding.com/" class="btn-cp-apply-scholarship-top bg-[#8B1E34] text-white text-xs font-bold px-5 py-2 rounded-full hover:bg-[#6B1525] transition cursor-pointer inline-block">
+                                Apply Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scholarship Card 2 -->
+                <div class="bg-white p-5 rounded-2xl shadow-xs border border-rose-50 flex flex-col sm:flex-row gap-5">
+                    <div class="w-full sm:w-44 h-40 shrink-0 bg-rose-50 rounded-xl overflow-hidden">
+                        <img src="assets/images/img_cp_markoding.png" alt="Scholarship Meeting" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex flex-col justify-between w-full">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="bg-rose-100 text-[#8B1E34] text-[10px] font-bold px-2.5 py-1 rounded-md tracking-wider uppercase">Featured Scholarship</span>
+                                <span class="text-rose-500 text-xs font-semibold flex items-center">
+                                    <span class="mr-1">⏳</span> Due: Oct 25
+                                </span>
+                            </div>
+                            <h3 class="font-bold text-gray-900 text-base leading-snug mb-2">Beasiswa Perempuan Inovasi</h3>
+                            <p class="text-gray-500 text-xs leading-relaxed">Fully funded opportunity for aspiring female software engineers to study at premier institutions across Europe.</p>
+                        </div>
+                        <div class="mt-4 sm:mt-0">
+                            <a href="https://www.markoding.org/pi-ibm" class="btn-cp-apply-scholarship-bottom bg-[#8B1E34] text-white text-xs font-bold px-5 py-2 rounded-full hover:bg-[#6B1525] transition cursor-pointer inline-block">
+                                Apply Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Jobs & Internships Layout -->
+            <div class="space-y-6">
+                <!-- Internship Card -->
+                <div class="bg-white p-6 rounded-2xl shadow-xs border border-rose-50 flex flex-col justify-between h-auto sm:h-52">
+                    <div>
+                        <span class="text-xs font-bold text-orange-400 tracking-wider uppercase">Internship</span>
+                        <h3 class="font-bold text-gray-900 text-lg mt-1 mb-2">UX Design Intern</h3>
+                        <p class="text-gray-500 text-xs leading-relaxed mb-4">Join a fast-growing fintech startup and help shape the future of inclusive banking for women globally.</p>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-gray-400 font-medium mb-3">
+                            <span class="flex items-center">🗓️</span>Deadline: Aug 12, 2026</span>
+                            <span class="flex items-center">💼</span>Remote / New York</span>
+                            
+                        </div>
+                        <a href="https://id.jobstreet.com/job/91774586?ref=search-standalone&type=standard&origin=showNewTab#sol=c9b7dd51ed75738c69534c66d45b9264e4b25cff" class="btn-cp-apply-uxintern w-full border border-[#8B1E34] text-[#8B1E34] text-xs font-bold py-2 rounded-lg hover:bg-rose-50 transition cursor-pointer text-center block">
+                            Apply Now
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Full-Time Job Card -->
+                <div class="bg-white p-6 rounded-2xl shadow-xs border border-rose-50 flex flex-col justify-between h-auto sm:h-52">
+                    <div>
+                        <span class="text-xs font-bold text-red-400 tracking-wider uppercase">Full-Time</span>
+                        <h3 class="font-bold text-gray-900 text-lg mt-1 mb-2">Product Manager</h3>
+                        <p class="text-gray-500 text-xs leading-relaxed mb-4">Lead cross-functional teams to build products that empower small business owners in emerging markets.</p>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-gray-400 font-medium mb-3">
+                            <span class="flex items-center">🗓️</span> Deadline: Dec 01, 2024</span>
+                            <span class="flex items-center"><span class="mr-1.5 text-xs">💼</span> Mid-Level Position</span>
+                        </div>
+                        <a href="https://id.jobstreet.com/job/92391269?ref=search-standalone&type=standard&origin=showNewTab#sol=b85293fa1b1f102787896d65413c1da70849582d" class="btn-cp-apply-pm w-full border border-[#8B1E34] text-[#8B1E34] text-xs font-bold py-2 rounded-lg hover:bg-rose-50 transition cursor-pointer text-center block">
+                            Apply Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION: cp-footer -->
+    <footer id="cp-footer" class="bg-[#21050B] text-rose-100/70 text-xs py-12 px-6 md:px-16 border-t border-rose-950">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
+            <!-- Left Branding Info -->
+            <div class="md:col-span-6 space-y-3">
+                <div class="text-xl font-bold text-white tracking-tight">SheRise</div>
+                <p class="max-w-sm leading-relaxed text-rose-200/50">
+                    &copy; 2026 SheRise. Empowering every woman to track her journey and own her story.
+                </p>
+            </div>
+            <!-- Right Sitelinks Layout -->
+            <div class="md:col-span-6 grid grid-cols-3 gap-4 text-left">
+                <div class="space-y-2">
+                    <span class="font-bold text-white block mb-1 text-xs">Platform</span>
+                    <a href="privacy.html" class="block hover:text-white transition">Privacy Policy</a>
+                    <a href="terms.html" class="block hover:text-white transition">Terms of Service</a>
+                </div>
+                <div class="space-y-2">
+                    <span class="font-bold text-white block mb-1 text-xs">Support</span>
+                    <a href="mailto:haisyahrlaf@student.ub.ac.id" class="block hover:text-white transition">Contact Us</a>
+                    <a href="resources.html" class="block hover:text-white transition">Resources</a>
+                </div>
+                <div class="space-y-2">
+                    <span class="font-bold text-white block mb-1 text-xs">Follow Us</span>
+                    <a href="https://www.instagram.com/sherise_careerempower/" target="_blank" rel="noopener noreferrer" class="flex items-center hover:text-white transition">
+                        <img src="assets/icons/ic_cp_instagram.png" alt="Instagram Icon" class="w-4 h-4 mr-2">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
