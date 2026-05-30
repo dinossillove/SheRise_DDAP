@@ -13,6 +13,9 @@ Semua file harus diletakkan sesuai strukturnya agar tidak merusak jalur (*path*)
 SheRise_DDAP/
 ├── assets/
 │   └── images/          <-- 🔴 SEMUA FOTO/GAMBAR MASUK SINI! JANGAN BIKIN FOLDER BARU!
+    ├── icons/
+    ├── logos/ 
+      
 ├── index.html           <-- Halaman Home
 ├── girls-spot.html      <-- Halaman Girls Spot
 ├── career-plan.html     <-- Halaman Career Plan
