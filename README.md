@@ -65,29 +65,3 @@ Kirim hasil kerjamu ke repository GitHub agar anggota tim lain bisa mengambil up
 git push origin main
 
 ```
-
----
-
-## ⚠️ Aturan Emas (Golden Rules)
-
-1. **Jangan membuat folder baru untuk aset.** Folder `assets/images/` sudah disiapkan untuk menampung seluruh gambar proyek kita.
-2. **Gunakan FontAwesome.** Kita sudah memasang CDN FontAwesome di bagian `<head>` halaman, jadi kamu tinggal panggil class-nya saja jika butuh ikon (contoh: `<i class="fas fa-user"></i>`).
-3. **Konfirmasi di grup.** Selalu kabari tim di grup chat setelah kamu melakukan `git push` agar yang lain bisa langsung melakukan `git pull`.
-
-*Selamat ngoding, teman-teman! Mari kita selesaikan proyek SheRise ini dengan lancar dan kompak!* 🔥
-
-```
-
----
-
-### Cara Mengunggahnya ke GitHub lewat Terminal VS Code:
-Setelah kamu *save* file `README.md` tersebut di VS Code, langsung jalankan perintah ini di terminalmu:
-
-```bash
-git add .
-git commit -m "docs: menambahkan file README.md untuk panduan tim"
-git push origin main
-
-```
-
-Begitu berhasil ter-*push*, coba buka halaman repository GitHub kalian di browser. Panduan di atas otomatis akan langsung muncul dengan visual yang rapi dan profesional di halaman utama bagian bawah! 🚀
