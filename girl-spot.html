@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Girls Spot - SheRise</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FFF9F8;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased flex flex-col min-h-screen">
+
+    <nav id="gs-navbar" class="bg-white border-b border-rose-100 py-4 px-6 md:px-16 flex justify-between items-center sticky top-0 z-50 shadow-xs">
+        <div class="text-2xl font-extrabold text-[#8B1E34] tracking-tight">SheRise</div>
+        <div class="hidden md:flex space-x-8 font-semibold text-gray-500 text-sm">
+            <a href="index.html" class="hover:text-[#8B1E34] transition">Home</a>
+            <a href="girls-spot.html" class="text-[#8B1E34] border-b-2 border-[#8B1E34] pb-1">Girls Spot</a>
+            <a href="#" class="hover:text-[#8B1E34] transition">My Record</a>
+            <a href="career-plan.html" class="hover:text-[#8B1E34] transition">Career Plan</a>
+        </div>
+        <button class="btn-gs-login bg-[#8B1E34] text-white px-7 py-2 rounded-full font-bold text-sm hover:bg-[#6B1525] transition shadow-xs cursor-pointer">
+            Login
+        </button>
+    </nav>
+
+    <main class="flex-grow max-w-6xl mx-auto px-6 py-10 w-full">
+        
+        <div id="gs-hero" class="bg-[#FFEDF0] rounded-[2rem] p-8 md:p-12 flex flex-col-reverse md:flex-row items-center justify-between mb-16 relative overflow-hidden">
+            <img src="assets/images/img_gs_header-garis.png" alt="Background Pattern" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-90">
+            
+            <div class="w-full md:w-1/2 flex justify-center mt-8 md:mt-0 relative z-10">
+                <img src="assets/images/img_gs_header.png" alt="Girls Spotlight Illustration" class="w-[80%] md:w-full max-w-md object-contain drop-shadow-sm">
+            </div>
+            
+            <div class="w-full md:w-1/2 text-center md:text-left md:pl-12 relative z-10">
+                <h1 class="text-5xl md:text-6xl font-extrabold text-[#8B1E34] leading-tight">
+                    Girls<br>Spotlight
+                </h1>
+            </div>
+        </div>
+
+        <div id="gs-profiles" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+            
+            <div class="flex flex-col text-center cursor-pointer group">
+                <div class="relative w-full h-72 md:h-80 p-6 mb-4 flex items-end overflow-hidden transition group-hover:shadow-xl bg-[#FAD5E1]">
+                    <div class="absolute bottom-6 left-6 right-6 top-6 bg-white overflow-hidden shadow-xs z-10">
+                        <img src="assets/images/img_gs_dr-siti-amirah.png" alt="Dr. Siti Amirah" class="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-110">
+                        <span class="bg-white text-[#8B1E34] text-[10px] font-bold px-3 py-1 shadow-sm uppercase tracking-wider absolute bottom-4 left-4 z-20">Healthcare</span>
+                    </div>
+                </div>
+                <h3 class="font-extrabold text-xl text-gray-900">Dr. Siti Amirah</h3>
+                <p class="text-[#8B1E34] text-sm font-semibold mt-1">Public Health Advocate</p>
+            </div>
+
+            <div class="flex flex-col text-center cursor-pointer group">
+                <div class="relative w-full h-72 md:h-80 p-6 mb-4 flex items-end overflow-hidden transition group-hover:shadow-xl bg-[#D3F1F6]">
+                    <div class="absolute bottom-6 left-6 right-6 top-6 bg-white overflow-hidden shadow-xs z-10">
+                        <img src="assets/images/img_gs_rania-wijaya.png" alt="Rania Wijaya" class="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-110">
+                        <span class="bg-white text-[#8B1E34] text-[10px] font-bold px-3 py-1 shadow-sm uppercase tracking-wider absolute bottom-4 left-4 z-20">Education</span>
+                    </div>
+                </div>
+                <h3 class="font-extrabold text-xl text-gray-900">Rania Wijaya</h3>
+                <p class="text-[#8B1E34] text-sm font-semibold mt-1">EdTech Founder</p>
+            </div>
+
+            <div class="flex flex-col text-center cursor-pointer group">
+                <div class="relative w-full h-72 md:h-80 p-6 mb-4 flex items-end overflow-hidden transition group-hover:shadow-xl bg-[#FAD5E1]">
+                    <div class="absolute bottom-6 left-6 right-6 top-6 bg-white overflow-hidden shadow-xs z-10">
+                        <img src="assets/images/img_gs_dian-sastro.png" alt="Dian Sastro" class="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-110">
+                        <span class="bg-white text-[#8B1E34] text-[10px] font-bold px-3 py-1 shadow-sm uppercase tracking-wider absolute bottom-4 left-4 z-20">Finance</span>
+                    </div>
+                </div>
+                <h3 class="font-extrabold text-xl text-gray-900">Dian Sastro</h3>
+                <p class="text-[#8B1E34] text-sm font-semibold mt-1">FinTech Strategist</p>
+            </div>
+
+            <div class="flex flex-col text-center cursor-pointer group">
+                <div class="relative w-full h-72 md:h-80 p-6 mb-4 flex items-end overflow-hidden transition group-hover:shadow-xl bg-[#D3F1F6]">
+                    <div class="absolute bottom-6 left-6 right-6 top-6 bg-white overflow-hidden shadow-xs z-10">
+                        <img src="assets/images/img_gs_dewi-sari.png" alt="Dewi Sari" class="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-110">
+                        <span class="bg-white text-[#8B1E34] text-[10px] font-bold px-3 py-1 shadow-sm uppercase tracking-wider absolute bottom-4 left-4 z-20">Corporate</span>
+                    </div>
+                </div>
+                <h3 class="font-extrabold text-xl text-gray-900">Dewi Sari</h3>
+                <p class="text-[#8B1E34] text-sm font-semibold mt-1">Associate Director</p>
+            </div>
+
+            <div class="flex flex-col text-center cursor-pointer group">
+                <div class="relative w-full h-72 md:h-80 p-6 mb-4 flex items-end overflow-hidden transition group-hover:shadow-xl bg-[#FAD5E1]">
+                    <div class="absolute bottom-6 left-6 right-6 top-6 bg-white overflow-hidden shadow-xs z-10">
+                        <img src="assets/images/img_gs_indah-lestari.png" alt="Indah Lestari" class="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-110">
+                        <span class="bg-white text-[#8B1E34] text-[10px] font-bold px-3 py-1 shadow-sm uppercase tracking-wider absolute bottom-4 left-4 z-20">Management</span>
+                    </div>
+                </div>
+                <h3 class="font-extrabold text-xl text-gray-900">Indah Lestari</h3>
+                <p class="text-[#8B1E34] text-sm font-semibold mt-1">Human Resources</p>
+            </div>
+
+            <div class="flex flex-col text-center cursor-pointer group">
+                <div class="relative w-full h-72 md:h-80 p-6 mb-4 flex items-end overflow-hidden transition group-hover:shadow-xl bg-[#D3F1F6]">
+                    <div class="absolute bottom-6 left-6 right-6 top-6 bg-white overflow-hidden shadow-xs z-10">
+                        <img src="assets/images/img_gs_maya-puteri.png" alt="Maya Puteri" class="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-110">
+                        <span class="bg-white text-[#8B1E34] text-[10px] font-bold px-3 py-1 shadow-sm uppercase tracking-wider absolute bottom-4 left-4 z-20">Law</span>
+                    </div>
+                </div>
+                <h3 class="font-extrabold text-xl text-gray-900">Maya Puteri</h3>
+                <p class="text-[#8B1E34] text-sm font-semibold mt-1">Ethics Researcher</p>
+            </div>
+
+        </div>
+
+        <div class="flex flex-col items-center justify-center mt-16 mb-8 text-center px-4">
+            <div class="flex items-center justify-center w-full max-w-md mb-6">
+                <div class="h-px bg-rose-200 flex-1"></div>
+                <i class="fas fa-sparkles text-rose-300 mx-4 text-xl"></i>
+                <div class="h-px bg-rose-200 flex-1"></div>
+            </div>
+            
+            <h4 class="text-[#8B1E34] font-bold text-lg mb-2">Kisah inspiratif lainnya sedang dikurasi.</h4>
+            <p class="text-gray-500 text-sm max-w-sm leading-relaxed">
+                Teruslah melangkah, berkarya, dan catat perjalananmu. Siapa tahu, profil selanjutnya di SheRise adalah <span class="font-bold text-[#8B1E34]">kamu!</span>
+            </p>
+        </div>
+
+    </main>
+
+    <footer id="gs-footer" class="bg-[#21050B] text-rose-100/70 text-xs py-12 px-6 md:px-16 border-t border-rose-950 mt-auto">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div class="md:col-span-6 space-y-3">
+                <div class="text-xl font-bold text-white tracking-tight">SheRise</div>
+                <p class="max-w-sm leading-relaxed text-rose-200/50">
+                    &copy; 2026 SheRise. Empowering every woman to track her journey and own her story.
+                </p>
+            </div>
+            <div class="md:col-span-6 grid grid-cols-3 gap-4 text-left">
+                <div class="space-y-2">
+                    <span class="font-bold text-white block mb-1 text-xs">Platform</span>
+                    <a href="privacy.html" class="block hover:text-white transition">Privacy Policy</a>
+                    <a href="terms.html" class="block hover:text-white transition">Terms of Service</a>
+                </div>
+                <div class="space-y-2">
+                    <span class="font-bold text-white block mb-1 text-xs">Support</span>
+                    <a href="mailto:haisyahrlaf@student.ub.ac.id" class="block hover:text-white transition">Contact Us</a>
+                    <a href="resources.html" class="block hover:text-white transition">Resources</a>
+                </div>
+                <div class="space-y-2">
+                    <span class="font-bold text-white block mb-1 text-xs">Follow Us</span>
+                    <a href="https://www.instagram.com/sherise_careerempower/" target="_blank" rel="noopener noreferrer" class="flex items-center hover:text-white transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
