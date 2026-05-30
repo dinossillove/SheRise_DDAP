@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SheRise — Track Your Journey, Own Your Story</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Fonts: Poppins (heading), Inter (body), Plus Jakarta Sans (logo/display) -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Icons: gunakan class FontAwesome, jangan pakai PNG untuk ikon biasa -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rose: {
+              brand:  '#9B1B4B',
+              light:  '#C2185B',
+              soft:   '#FDE8EF',
+              muted:  '#F5D0DE',
+              dark:   '#6D0E30',
+              deep:   '#4A0822',
+            }
+          },
+          fontFamily: {
+            heading: ['Poppins',           'sans-serif'],
+            jakarta: ['Plus Jakarta Sans', 'sans-serif'],
+            body:    ['Inter',             'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #fff; color: #1a1a1a; margin: 0; }
+    img, svg { border: none !important; outline: none !important; }
+
+    @keyframes fadeUp  { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes slideIn { from { opacity:0; transform:translateX(-20px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes barGrow { from { width:0; } to { width:var(--bar-w); } }
+
+    .fade-up  { animation: fadeUp  0.75s ease both; }
+    .slide-in { animation: slideIn 0.6s  ease both; }
+
+    .hero-bg {
+      background: linear-gradient(135deg, #fff 0%, #fde8ef 55%, #fcc5d8 100%);
+    }
+
+    .progress-bar { animation: barGrow 1.4s cubic-bezier(.4,0,.2,1) both; }
+
+    #mobile-menu      { display: none; }
+    #mobile-menu.open { display: flex; }
+
+    .milestone-card {
+      background: rgba(255,255,255,0.95);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(155,27,75,0.14);
+      padding: 14px 18px;
+      backdrop-filter: blur(8px);
+    }
+
+    .feature-card { transition: transform .3s ease, box-shadow .3s ease; }
+    .feature-card:hover { transform: translateY(-5px); box-shadow: 0 14px 44px rgba(155,27,75,0.16); }
+
+    .group-photo-wrapper {
+      position: relative;
+      width: clamp(240px, 42vw, 380px);
+      height: clamp(240px, 42vw, 380px);
+      flex-shrink: 0;
+    }
+    .group-photo-circle {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid #F5D0DE;
+      box-shadow: 0 12px 40px rgba(155,27,75,0.18);
+    }
+    .deco-icon {
+      position: absolute;
+      width: 26%;
+      aspect-ratio: 1/1;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .deco-icon img { width:100%; height:100%; object-fit:contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.18)); }
+    .deco-icon--tl { top:4%; left:2%; transform:translate(-35%,-35%); }
+    .deco-icon--br { bottom:4%; right:2%; transform:translate(35%,35%); }
+
+    .cta-circle {
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.18);
+      position: absolute;
+      pointer-events: none;
+    }
+
+    /* Wave arch: full-bleed SVG transition dari merah ke putih */
+    .wave-arch-svg-wrap {
+      margin-top: -1px;
+      line-height: 0;
+      font-size: 0;
+      border: none;
+      outline: none;
+    }
+    .wave-arch-svg-wrap svg {
+      display: block;
+      width: 100%;
+      height: clamp(60px, 9vw, 130px);
+      border: none;
+      outline: none;
+      vertical-align: bottom;
+    }
+
+    /* Ribbon: posisi di area putih, overlap ke atas arch */
+    .ribbon-anchor {
+      display: flex;
+      justify-content: center;
+      margin-top: clamp(-55px, -5vw, -70px);
+      position: relative;
+      z-index: 10;
+      border: none;
+      outline: none;
+    }
+    .ribbon-anchor img {
+      width: clamp(80px, 12vw, 160px);
+      height: auto;
+      display: block;
+      border: none;
+      outline: none;
+      filter: drop-shadow(0 4px 14px rgba(155,27,75,0.22));
+      transform: translateY(-30%);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body class="antialiased">
+
+  <nav id="main-nav" class="sticky top-0 z-50 bg-white shadow-[0_1px_2px_rgba(65,0,7,0.06)] backdrop-blur-[6px]">
+    <div class="max-w-[1280px] mx-auto px-6 md:px-12 py-4 flex justify-between items-center">
+
+      <a href="index.html"
+         class="font-jakarta font-extrabold text-2xl leading-8 text-rose-800 tracking-tight">
+        SheRise
+      </a>
+
+      <ul class="hidden md:flex items-center gap-8 list-none m-0 p-0">
+        <li><a href="index.html"       data-page="index"       class="nav-link font-body text-base pb-1 transition-all">Home</a></li>
+        <li><a href="girl-spot.html"  data-page="girl-spot"  class="nav-link font-body text-base pb-1 transition-all">Girls Spot</a></li>
+        <li><a href="my-record.html"   data-page="my-record"   class="nav-link font-body text-base pb-1 transition-all">My Record</a></li>
+        <li><a href="career-plan.html" data-page="career-plan" class="nav-link font-body text-base pb-1 transition-all">Career Plan</a></li>
+      </ul>
+
+      <div class="hidden md:flex">
+        <a href="login.html"
+           class="px-6 py-2 bg-pink-800 rounded-full font-body text-base font-bold text-white hover:opacity-90 transition-opacity">
+          Login
+        </a>
+      </div>
+
+      <button id="hamburger" aria-label="Buka menu" onclick="toggleMenu()"
+              class="md:hidden flex flex-col gap-1.5 p-2">
+        <span class="w-6 h-0.5 bg-rose-800 block"></span>
+        <span class="w-6 h-0.5 bg-rose-800 block"></span>
+        <span class="w-6 h-0.5 bg-rose-800 block"></span>
+      </button>
+    </div>
+
+    <div id="mobile-menu"
+         class="flex-col gap-1 px-6 pb-4 md:hidden bg-white border-t border-pink-100">
+      <a href="index.html"       data-page="index"       class="nav-link-mobile block py-2 font-body text-base text-rose-700">Home</a>
+      <a href="girl-spot.html"  data-page="girl-spot"  class="nav-link-mobile block py-2 font-body text-base text-rose-700">Girls Spot</a>
+      <a href="my-record.html"   data-page="my-record"   class="nav-link-mobile block py-2 font-body text-base text-rose-700">My Record</a>
+      <a href="career-plan.html" data-page="career-plan" class="nav-link-mobile block py-2 font-body text-base text-rose-700">Career Plan</a>
+      <a href="login.html"
+         class="mt-2 inline-block bg-pink-800 text-white font-body font-bold text-base px-6 py-2 rounded-full">
+        Login
+      </a>
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+  <section id="hero" class="hero-bg overflow-hidden">
+    <div class="max-w-[1280px] mx-auto px-6 md:px-12 py-16 md:py-24 flex flex-col md:flex-row gap-12 items-center">
+
+      <div class="fade-up flex-1 flex flex-col gap-6 order-2 md:order-1">
+        <span class="inline-flex self-start px-4 py-1 bg-red-100/40 rounded-full
+                     font-body text-pink-800 text-sm font-normal leading-6">
+          Empowering Indonesian Women
+        </span>
+
+        <h1 class="font-jakarta font-extrabold text-5xl md:text-6xl lg:text-7xl leading-tight text-pink-950">
+          Track Your<br />Journey,<br />
+          <span class="text-pink-800">Own Your Story.</span>
+        </h1>
+
+        <p class="font-body text-stone-600 text-base leading-6 max-w-[480px]">
+          A dedicated platform designed for the modern Indonesian woman
+          to document achievements, connect with mentors, and navigate
+          professional growth with confidence.
+        </p>
+
+        <div class="flex flex-wrap gap-4 pt-2">
+          <a href="girl-spot.html"
+             class="font-body font-bold text-base px-10 py-4 bg-pink-800 text-white rounded-xl
+                    hover:bg-rose-dark transition-colors">
+            Explore Girls Spot
+          </a>
+          <a href="my-record.html"
+             class="font-body font-bold text-base px-10 py-4 text-pink-800 rounded-xl
+                    border-2 border-pink-800 hover:bg-rose-soft transition-colors">
+            Start Recording
+          </a>
+        </div>
+      </div>
+
+      <div class="relative flex-shrink-0 flex justify-center order-1 md:order-2">
+        <div class="relative w-[min(88vw,420px)] rounded-3xl overflow-hidden shadow-2xl
+                    outline outline-4 outline-white rotate-[2deg]">
+          <!-- assets/images/img_home_heromain.jpg -->
+          <img src="assets/images/img_home_heromain.jpg" alt="Woman holding a tablet"
+               class="w-full h-full object-cover aspect-[4/5]" />
+        </div>
+
+        <div class="milestone-card slide-in
+                    absolute bottom-[-12px] left-[-12px] md:left-[-40px]
+                    w-[min(220px,56vw)]">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="w-9 h-9 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-star text-pink-800 text-xs"></i>
+            </span>
+            <span class="font-body font-bold text-sm text-stone-900">Daily Milestone</span>
+          </div>
+          <p class="font-body text-xs text-stone-600 leading-5 italic">
+            "Successfully led the quarterly strategy meeting for the regional team."
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- STATS -->
+  <section aria-label="Statistik partisipasi tenaga kerja" class="bg-white">
+    <div class="max-w-[1280px] mx-auto px-6 md:px-12 py-8">
+      <div class="grid sm:grid-cols-2 gap-4 font-body">
+
+        <div class="bg-stone-700 text-white rounded-2xl p-6">
+          <div class="flex justify-between items-center mb-3">
+            <span class="text-sm font-medium text-gray-300">Female Labor Participation</span>
+            <span class="font-bold text-xl text-rose-400 font-heading">56%</span>
+          </div>
+          <div class="h-3 bg-white/10 rounded-full overflow-hidden">
+            <div class="progress-bar h-full bg-rose-400 rounded-full"
+                 style="--bar-w:56%; width:56%;"></div>
+          </div>
+        </div>
+
+        <div class="bg-pink-800 text-white rounded-2xl p-6">
+          <div class="flex justify-between items-center mb-3">
+            <span class="text-sm font-medium text-rose-200">Male Labor Participation</span>
+            <span class="font-bold text-xl font-heading">80%</span>
+          </div>
+          <div class="h-3 bg-white/20 rounded-full overflow-hidden">
+            <div class="progress-bar h-full bg-white/70 rounded-full"
+                 style="--bar-w:80%; width:80%;"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- MISSION -->
+  <section id="mission" class="bg-white py-20 reveal">
+    <div class="max-w-[1280px] mx-auto px-6 md:px-12
+                flex flex-col md:flex-row gap-14 items-center">
+
+      <div class="flex-1 flex flex-col gap-6">
+        <p class="font-heading font-bold text-sm text-pink-800 tracking-wide uppercase">
+          The Bridge We're Building Together
+        </p>
+
+        <h2 class="font-heading font-bold text-3xl md:text-4xl lg:text-5xl leading-tight"
+            style="color:#94062A;">
+          Our Goal Closing the gap through structured mentorship and personal achievement tracking.
+        </h2>
+
+        <p class="font-body text-stone-500 text-base leading-6 max-w-lg">
+          In Indonesia, the professional landscape still faces significant disparities.
+          SheRise is here to empower women to close this gap by providing the tools for
+          visibility and growth. Cause,
+          <em class="text-pink-800 font-semibold not-italic">"When women rise, the whole economy grows."</em>
+        </p>
+
+        <div class="grid grid-cols-3 gap-6 pt-4 font-body border-t border-rose-muted">
+          <div>
+            <p class="font-heading font-bold text-2xl text-stone-700">🙋🏻‍♀️<br/>1000+</p>
+            <p class="text-sm text-stone-500 mt-1">Community Members</p>
+          </div>
+          <div>
+            <p class="font-heading font-bold text-2xl text-stone-700">🧭<br/>38</p>
+            <p class="text-sm text-stone-500 mt-1">Provinces across Indonesia</p>
+          </div>
+          <div>
+            <p class="font-heading font-bold text-2xl text-stone-700">👩‍🎓<br/>88%</p>
+            <p class="text-sm text-stone-500 mt-1">Continued to career step</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center md:justify-end flex-shrink-0">
+        <div class="group-photo-wrapper">
+          <div class="group-photo-circle">
+            <!-- assets/images/img_home_community.jpg -->
+            <img src="assets/images/img_home_community.jpg" alt="Komunitas SheRise"
+                 class="w-full h-full object-cover" />
+          </div>
+          <div class="deco-icon deco-icon--tl" aria-hidden="true">
+            <!-- assets/icons/img_home_iconbunga.png -->
+            <img src="assets/icons/ic_home_bunga.png" alt="" />
+          </div>
+          <div class="deco-icon deco-icon--br" aria-hidden="true">
+            <!-- assets/icons/img_home_iconhati.png -->
+            <img src="assets/icons/ic_home_hati.png" alt="" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- QUOTE -->
+  <div style="background-color:#B90834;" class="overflow-hidden">
+    <section aria-label="Kutipan inspirasi" class="pt-20 pb-6 px-6 reveal">
+      <div class="max-w-2xl mx-auto flex flex-col items-center text-center gap-6">
+
+        <div class="w-20 h-20 rounded-full overflow-hidden border-4 border-rose-dark shadow-lg flex-shrink-0">
+          <!-- assets/images/img_home_srimulyani.jpg -->
+          <img src="assets/images/img_home_srimulyani.jpg" alt="Sri Mulyani Indrawati"
+               class="w-full h-full object-cover" />
+        </div>
+
+        <blockquote class="font-heading font-semibold italic text-xl md:text-2xl leading-10 text-rose-100">
+          "Jangan pernah berhenti bermimpi, karena mimpi adalah benih dari kenyataan yang akan kita capai di masa depan."
+        </blockquote>
+
+        <div class="font-body">
+          <p class="font-bold text-base text-rose-100 tracking-wide">— Sri Mulyani Indrawati</p>
+          <p class="text-sm text-stone-50 opacity-80 mt-0.5">Minister of Finance, Indonesia</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Wave arch: SVG full-bleed merah → putih, preserveAspectRatio="none" biar selalu edge-to-edge -->
+    <div class="wave-arch-svg-wrap" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 130" preserveAspectRatio="none">
+        <path d="M0,130 C0,130 360,0 720,0 C1080,0 1440,130 1440,130 Z" fill="#ffffff" />
+      </svg>
+    </div>
+
+  </div>
+
+  <!-- Ribbon: di luar container merah supaya tidak ter-clip overflow:hidden -->
+  <!-- assets/images/img_home_pita.png -->
+  <div class="ribbon-anchor" aria-hidden="true">
+    <img src="assets/images/img_home_pita.png" alt="" />
+  </div>
+
+
+  <!-- FEATURES -->
+  <section id="features" class="bg-white pb-24 pt-6 px-6 reveal">
+    <div class="max-w-[1280px] mx-auto">
+
+      <div class="text-center mb-14">
+        <h2 class="font-jakarta font-bold text-2xl md:text-3xl text-stone-900 mb-3">
+          Discover Our Features!
+        </h2>
+        <p class="font-body text-stone-600 text-base leading-6 max-w-lg mx-auto">
+          The heart of SheRise where community meets opportunity.
+          Join circles, find mentors, and share your path.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <article class="feature-card rounded-2xl overflow-hidden border border-rose-muted shadow-sm cursor-pointer bg-white">
+          <div class="relative overflow-hidden">
+            <!-- assets/images/img_home_careerplan.jpg -->
+            <img src="assets/images/img_home_careerplan.jpg" alt="Career Plan"
+                 class="w-full aspect-video object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-rose-950/60 to-transparent flex items-end p-4">
+              <span class="text-5xl" aria-hidden="true">💼</span>
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-jakarta font-bold text-stone-900 text-xl mb-2">Career Plan</h3>
+            <p class="font-body text-stone-600 text-sm leading-relaxed">
+              Plan your next step with organized opportunities, goals, and deadlines.
+            </p>
+          </div>
+        </article>
+
+        <article class="feature-card rounded-2xl overflow-hidden border border-rose-muted shadow-sm cursor-pointer bg-white">
+          <div class="relative overflow-hidden">
+            <!-- assets/images/img_home_girlspotlight.jpg -->
+            <img src="assets/images/img_home_girlspotlight.jpg" alt="Girl Spotlight"
+                 class="w-full aspect-video object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-rose-950/60 to-transparent flex items-end p-4">
+              <span class="text-5xl" aria-hidden="true">✨</span>
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-jakarta font-bold text-stone-900 text-xl mb-2">Girl Spotlight</h3>
+            <p class="font-body text-stone-600 text-sm leading-relaxed">
+              Discover inspiring women stories, journeys, and career insights.
+            </p>
+          </div>
+        </article>
+
+        <article class="feature-card rounded-2xl overflow-hidden border border-rose-muted shadow-sm cursor-pointer bg-white sm:col-span-2 lg:col-span-1">
+          <div class="relative overflow-hidden">
+            <!-- assets/images/img_home_recordtrack.jpg -->
+            <img src="assets/images/img_home_recordtrack.jpg" alt="Record Track"
+                 class="w-full aspect-video object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-rose-950/60 to-transparent flex items-end p-4">
+              <span class="text-5xl" aria-hidden="true">✍🏻</span>
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-jakarta font-bold text-stone-900 text-xl mb-2">Record Track</h3>
+            <p class="font-body text-stone-600 text-sm leading-relaxed">
+              Save your achievements and see how far you've grown.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CTA -->
+  <section aria-label="Call to action"
+           style="background: linear-gradient(to right, #9B1B4B, #B90834);"
+           class="py-24 px-6 relative overflow-hidden reveal">
+
+    <div class="cta-circle opacity-20" style="left:-130px; top:50%; transform:translateY(-50%);"></div>
+    <div class="cta-circle opacity-15" style="right:-130px; top:50%; transform:translateY(-50%);"></div>
+
+    <div class="relative z-10 max-w-2xl mx-auto text-center flex flex-col items-center gap-6">
+      <h2 class="font-jakarta font-bold text-white text-2xl md:text-3xl leading-tight">
+        Ready to Own Your Professional Story?
+      </h2>
+      <p class="font-body text-white/80 text-base leading-6 max-w-md">
+        Join a community of thousands of Indonesian women who are taking charge of their
+        careers through intentional tracking and support.
+      </p>
+      <a href="#"
+         class="font-body font-bold text-pink-800 text-xl md:text-2xl
+                px-12 py-5 bg-white rounded-full shadow-lg hover:bg-rose-soft transition-colors">
+        Get Started Now
+      </a>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="bg-rose-950 text-white">
+    <div class="max-w-[1280px] mx-auto px-6 md:px-12 py-12
+                border-t border-stone-300/20
+                flex flex-col md:flex-row justify-between items-start gap-10">
+
+      <div class="flex flex-col gap-3 max-w-xs">
+        <p class="font-jakarta font-bold text-2xl text-red-100">SheRise</p>
+        <p class="font-body text-sm text-red-100/80 leading-6">
+          © 2024 SheRise. Empowering every woman to track her journey and own her story.
+        </p>
+      </div>
+
+      <nav aria-label="Footer links" class="flex flex-col sm:flex-row gap-y-2 gap-x-12 font-body">
+        <a href="privacy.html"   class="text-base text-red-100/80 hover:text-white transition-colors">Privacy Policy</a>
+        <a href="terms.html"     class="text-base text-red-100/80 hover:text-white transition-colors">Terms of Service</a>
+        <a href="#"              class="text-base text-red-100/80 hover:text-white transition-colors">Contact Us</a>
+        <a href="resources.html" class="text-base text-red-100/80 hover:text-white transition-colors">Resources</a>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <a href="#" aria-label="Instagram"
+           class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-colors">
+          <i class="fab fa-instagram text-sm"></i>
+        </a>
+        <a href="#" aria-label="Twitter / X"
+           class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-colors">
+          <i class="fab fa-x-twitter text-sm"></i>
+        </a>
+        <a href="#" aria-label="LinkedIn"
+           class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-colors">
+          <i class="fab fa-linkedin-in text-sm"></i>
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('mobile-menu').classList.toggle('open');
+    }
+    document.querySelectorAll('#mobile-menu a').forEach(link =>
+      link.addEventListener('click', () =>
+        document.getElementById('mobile-menu').classList.remove('open')
+      )
+    );
+
+    (function setActiveNav() {
+      const filename = window.location.pathname.split('/').pop();
+      const page     = filename ? filename.replace('.html','') : 'index';
+
+      document.querySelectorAll('.nav-link').forEach(link => {
+        if (link.dataset.page === page) {
+          link.classList.add('font-bold','text-pink-800','border-b-2','border-pink-800');
+          link.setAttribute('aria-current','page');
+        } else {
+          link.classList.remove('font-bold','text-pink-800','border-b-2','border-pink-800');
+          link.classList.add('font-normal','text-rose-700');
+        }
+      });
+
+      document.querySelectorAll('.nav-link-mobile').forEach(link => {
+        if (link.dataset.page === page) {
+          link.classList.add('font-bold','text-pink-800');
+          link.setAttribute('aria-current','page');
+        } else {
+          link.classList.remove('font-bold','text-pink-800');
+          link.classList.add('text-rose-700');
+        }
+      });
+    })();
+
+    const barObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const bar = e.target;
+          bar.style.width = bar.style.getPropertyValue('--bar-w') || '0%';
+          barObserver.unobserve(bar);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+      bar.style.width = '0';
+      barObserver.observe(bar);
+    });
+
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
+
+</body>
+</html>
