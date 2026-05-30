@@ -5,33 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - SheRise</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #FFF9F8; }
+        /* Import font Inter (Body) dan Poppins (Heading) dari Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap');
+        
+        /* Default body pakai Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFF9F8;
+        }
+        
+        /* Semua heading otomatis pakai Poppins */
+        h1, h2, h3, h4, h5, h6, .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
     </style>
 </head>
 <body class="text-gray-800 antialiased flex flex-col min-h-screen">
 
-    <!-- NAVBAR -->
     <nav class="bg-white border-b border-rose-100 py-4 px-6 md:px-16 flex justify-between items-center sticky top-0 z-50 shadow-xs">
-        <div class="text-2xl font-extrabold text-[#8B1E34] tracking-tight">SheRise</div>
+        <div class="font-poppins text-2xl font-extrabold text-[#8B1E34] tracking-tight">SheRise</div>
         <div class="hidden md:flex space-x-8 font-semibold text-gray-500 text-sm">
             <a href="index.html" class="hover:text-[#8B1E34] transition">Home</a>
-            <a href="girl-spot.html" class="hover:text-[#8B1E34] transition">Girls Spot</a>
+            <a href="girls-spot.html" class="hover:text-[#8B1E34] transition">Girls Spot</a>
             <a href="#" class="hover:text-[#8B1E34] transition">My Record</a>
-              <a href="career-plan.html" class="hover:text-[#8B1E34] transition">Career Plan</a>
+            <a href="career-plan.html" class="hover:text-[#8B1E34] transition">Career Plan</a>
         </div>
-        <button class="bg-[#8B1E34] text-white px-7 py-2 rounded-full font-bold text-sm hover:bg-[#6B1525] transition shadow-xs cursor-pointer">Login</button>
+        <button class="bg-[#8B1E34] text-white px-7 py-2 rounded-full font-semibold text-sm hover:bg-[#6B1525] transition shadow-xs cursor-pointer">Login</button>
     </nav>
 
-    <!-- CONTENT: TEXT DOCUMENT -->
     <main class="flex-grow max-w-3xl mx-auto px-6 py-12 md:py-20">
         <div class="mb-10 border-b border-rose-200 pb-8">
             <h1 class="text-3xl md:text-5xl font-extrabold text-[#8B1E34] mb-4">Privacy Policy</h1>
             <p class="text-gray-500 font-medium">Last updated: May 2026</p>
         </div>
 
-        <div class="space-y-8 text-gray-700 leading-relaxed">
+        <div class="space-y-8 text-gray-700 leading-relaxed text-base">
             <section>
                 <h2 class="text-xl font-bold text-gray-900 mb-3">1. Information We Collect</h2>
                 <p>At SheRise, we are committed to protecting your personal information. We collect information you provide directly to us when you create an account, update your profile, or interact with our career plan and mentorship features. This may include your name, email address, educational background, and professional interests.</p>
@@ -59,11 +70,10 @@
         </div>
     </main>
 
-    <!-- FOOTER -->
     <footer class="bg-[#21050B] text-rose-100/70 text-xs py-12 px-6 md:px-16 border-t border-rose-950 mt-auto">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
             <div class="md:col-span-6 space-y-3">
-                <div class="text-xl font-bold text-white tracking-tight">SheRise</div>
+                <div class="font-poppins text-xl font-bold text-white tracking-tight">SheRise</div>
                 <p class="max-w-sm leading-relaxed text-rose-200/50">&copy; 2026 SheRise. Empowering every woman to track her journey and own her story.</p>
             </div>
             <div class="md:col-span-6 grid grid-cols-3 gap-4 text-left">
@@ -74,13 +84,13 @@
                 </div>
                 <div class="space-y-2">
                     <span class="font-bold text-white block mb-1 text-xs">Support</span>
-                    <a href="#" class="block hover:text-white transition">Contact Us</a>
+                    <a href="mailto:haisyahrlaf@student.ub.ac.id" class="block hover:text-white transition">Contact Us</a>
                     <a href="resources.html" class="block hover:text-white transition">Resources</a>
                 </div>
                 <div class="space-y-2">
                     <span class="font-bold text-white block mb-1 text-xs">Follow Us</span>
                     <a href="https://www.instagram.com/sherise_careerempower/" target="_blank" rel="noopener noreferrer" class="flex items-center hover:text-white transition">
-                        <img src="assets/icons/ic_cp_instagram.png" alt="Instagram Icon" class="w-4 h-4">
+                        <i class="fab fa-instagram text-base"></i>
                     </a>
                 </div>
             </div>

@@ -6,25 +6,34 @@
     <title>Girls Spot - SheRise</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        /* Import font Inter (Body) dan Poppins (Heading) dari Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap');
+        
+        /* Default body pakai Inter */
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: #FFF9F8;
+        }
+        
+        /* Semua heading otomatis pakai Poppins */
+        h1, h2, h3, h4, h5, h6, .font-poppins {
+            font-family: 'Poppins', sans-serif;
         }
     </style>
 </head>
 <body class="text-gray-800 antialiased flex flex-col min-h-screen">
 
     <nav id="gs-navbar" class="bg-white border-b border-rose-100 py-4 px-6 md:px-16 flex justify-between items-center sticky top-0 z-50 shadow-xs">
-        <div class="text-2xl font-extrabold text-[#8B1E34] tracking-tight">SheRise</div>
+        <div class="font-poppins text-2xl font-extrabold text-[#8B1E34] tracking-tight">SheRise</div>
         <div class="hidden md:flex space-x-8 font-semibold text-gray-500 text-sm">
             <a href="index.html" class="hover:text-[#8B1E34] transition">Home</a>
             <a href="girls-spot.html" class="text-[#8B1E34] border-b-2 border-[#8B1E34] pb-1">Girls Spot</a>
             <a href="#" class="hover:text-[#8B1E34] transition">My Record</a>
             <a href="career-plan.html" class="hover:text-[#8B1E34] transition">Career Plan</a>
         </div>
-        <button class="btn-gs-login bg-[#8B1E34] text-white px-7 py-2 rounded-full font-bold text-sm hover:bg-[#6B1525] transition shadow-xs cursor-pointer">
+        <button class="btn-gs-login bg-[#8B1E34] text-white px-7 py-2 rounded-full font-semibold text-sm hover:bg-[#6B1525] transition shadow-xs cursor-pointer">
             Login
         </button>
     </nav>
@@ -133,7 +142,7 @@
     <footer id="gs-footer" class="bg-[#21050B] text-rose-100/70 text-xs py-12 px-6 md:px-16 border-t border-rose-950 mt-auto">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
             <div class="md:col-span-6 space-y-3">
-                <div class="text-xl font-bold text-white tracking-tight">SheRise</div>
+                <div class="font-poppins text-xl font-bold text-white tracking-tight">SheRise</div>
                 <p class="max-w-sm leading-relaxed text-rose-200/50">
                     &copy; 2026 SheRise. Empowering every woman to track her journey and own her story.
                 </p>
