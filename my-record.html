@@ -17,7 +17,7 @@
       --rose-700:  #be123c;
       --rose-800:  #9f1239;
       --rose-950:  #4c0519;
-      --pink-100:  #fce7f3;
+      --pink-100:  #FFE8ED;
       --pink-800:  #9d174d;
       --pink-950:  #500724;
       --red-100:   #fee2e2;
@@ -572,7 +572,6 @@
 </head>
 <body>
 
-<!-- ══════════════ HEADER ══════════════ -->
 <header class="site-header">
   <nav class="nav-inner" aria-label="Main navigation">
     <a href="index.html" class="nav-logo">SheRise</a>
@@ -591,7 +590,6 @@
   </nav>
 </header>
 
-<!-- ══════════════ HERO ══════════════ -->
 <section class="hero" aria-label="Page introduction">
   <div class="hero-text">
     <h1>List Out What You Did!</h1>
@@ -599,11 +597,9 @@
   </div>
 </section>
 
-<!-- ══════════════ MAIN ══════════════ -->
 <main>
   <div class="main-content">
 
-    <!-- Stats -->
     <section class="stats-row" aria-label="Quick stats">
       <article class="stat-card">
         <p class="stat-label">TOTAL RECORDS</p>
@@ -623,7 +619,6 @@
       </article>
     </section>
 
-    <!-- Table -->
     <section class="table-card" aria-label="Recorded activities">
       <div class="table-wrapper">
         <table>
@@ -700,29 +695,20 @@
       </div>
     </section>
 
-  </div><!-- /main-content -->
-
-  <!-- ══════════════ FORM SECTION ══════════════ -->
-  <div class="form-section-wrapper">
-    <!-- Convex arc wave — stone-50 background "bites" into the red -->
+  </div><div class="form-section-wrapper">
     <div class="form-wave" aria-hidden="true">
       <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Stone-50 fills from top down, with bottom edge curving downward in the center -->
         <path d="M0,0 L1440,0 L1440,20 Q720,100 0,20 Z" fill="#fafaf9"/>
       </svg>
     </div>
   <div class="form-section-bg">
     <div class="add-record-header">
-      <svg class="add-record-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
-      </svg>
       <h2>Add New Record</h2>
     </div>
 
     <section class="form-card" aria-label="Add new record form">
       <form class="form-grid" id="recordForm" novalidate>
 
-        <!-- SEMESTER custom dropdown -->
         <div class="form-group">
           <span class="form-label" id="lbl-semester">SEMESTER</span>
           <div
@@ -751,18 +737,12 @@
           </div>
         </div>
 
-        <!-- ACTIVITY NAME -->
         <div class="form-group">
           <label for="activity" class="form-label">ACTIVITY NAME</label>
           <input id="activity" name="activity" type="text" class="form-input" placeholder="e.g. National UX Design Competition" required />
         </div>
 
-        <!-- YEAR + CATEGORY -->
         <div class="form-row-2">
-          <div class="form-group">
-            <label for="year" class="form-label">YEAR</label>
-            <input id="year" name="year" type="number" class="form-input" placeholder="2024" min="2000" max="2099" required />
-          </div>
           <div class="form-group">
             <span class="form-label" id="lbl-category">CATEGORY</span>
             <div
@@ -788,9 +768,12 @@
               <input type="hidden" name="category" />
             </div>
           </div>
+          <div class="form-group">
+            <label for="year" class="form-label">YEAR</label>
+            <input id="year" name="year" type="number" class="form-input" placeholder="2024" min="2000" max="2099" required />
+          </div>
         </div>
 
-        <!-- LEVEL -->
         <div class="form-group">
           <span class="form-label" id="level-label">LEVEL</span>
           <div class="level-group" role="radiogroup" aria-labelledby="level-label">
@@ -809,13 +792,11 @@
           </div>
         </div>
 
-        <!-- RESULT / POSITION -->
         <div class="form-group">
           <label for="result" class="form-label">RESULT / POSITION</label>
           <input id="result" name="result" type="text" class="form-input" placeholder="e.g. 1st Winner, Lead Designer" />
         </div>
 
-        <!-- STATUS custom dropdown -->
         <div class="form-group">
           <span class="form-label" id="lbl-status">STATUS</span>
           <div
@@ -839,16 +820,12 @@
           </div>
         </div>
 
-        <!-- SAVE -->
         <button type="submit" class="btn-save">Save</button>
 
       </form>
     </section>
-  </div><!-- /form-section-bg -->
-  </div><!-- /form-section-wrapper -->
-</main>
+  </div></div></main>
 
-<!-- ══════════════ FOOTER ══════════════ -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
