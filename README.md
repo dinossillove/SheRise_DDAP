@@ -15,10 +15,12 @@ SheRise_DDAP/
 │   └── images/          <-- 🔴 SEMUA FOTO/GAMBAR MASUK SINI! JANGAN BIKIN FOLDER BARU!
     ├── icons/
     ├── logos/ 
-      
-├── index.html           <-- Halaman Home
+ 
 ├── girls-spot.html      <-- Halaman Girls Spot
 ├── career-plan.html     <-- Halaman Career Plan
+├── privacy.html         <-- Footer
+├── resources.html       <-- Footer
+├── terms.html           <-- Footer
 └── README.md            <-- Panduan ini
 
 ```
