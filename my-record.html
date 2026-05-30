@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SheRise — My Record</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── CSS Variables (UI Kit) ─────────────────────────────── */
+    :root {
+      --rose-50:   #fff1f2;
+      --rose-100:  #ffe4e6;
+      --rose-200:  #fecdd3;
+      --rose-700:  #be123c;
+      --rose-800:  #9f1239;
+      --rose-950:  #4c0519;
+      --pink-100:  #fce7f3;
+      --pink-800:  #9d174d;
+      --pink-950:  #500724;
+      --red-100:   #fee2e2;
+      --red-950:   #450a0a;
+      --stone-50:  #fafaf9;
+      --stone-300: #d6d3d1;
+      --stone-500: #78716c;
+      --stone-600: #57534e;
+      --stone-900: #1c1917;
+      --white:     #ffffff;
+      --black:     #000000;
+
+      --font-jakarta: 'Plus Jakarta Sans', sans-serif;
+      --font-inter:   'Inter', sans-serif;
+      --font-poppins: 'Poppins', sans-serif;
+
+      --shadow-rose: 0 4px 20px -2px rgba(136,13,30,0.08);
+      --radius-xl:   0.75rem;
+      --radius-lg:   0.5rem;
+      --radius-full: 9999px;
+    }
+
+    /* ─── Reset ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-inter);
+      background: var(--stone-50);
+      color: var(--stone-900);
+      min-height: 100vh;
+    }
+    img { display: block; max-width: 100%; }
+    a   { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; }
+
+    /* ─── HEADER / NAV ───────────────────────────────────────── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--white);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 1px 2px 0 rgba(65,0,7,0.05);
+    }
+    .nav-inner {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    /* Logo — font-extrabold, rose-800 */
+    .nav-logo {
+      font-family: var(--font-jakarta);
+      font-weight: 800;
+      font-size: 1.5rem;
+      line-height: 2rem;
+      color: var(--rose-800);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    /* Nav links — gap-8 */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    /* Default link */
+    .nav-links a {
+      font-family: var(--font-inter);
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5rem;
+      color: var(--rose-700);
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    /* Active page: font-bold + border-b-2 border-pink-800 */
+    .nav-links a.active {
+      font-weight: 700;
+      color: var(--pink-800);
+      border-bottom: 2px solid var(--pink-800);
+    }
+    .nav-links a:hover {
+      color: var(--pink-800);
+      border-bottom-color: var(--pink-800);
+    }
+    /* Login — px-6 py-2 bg-pink-800 rounded-full */
+    .nav-login {
+      font-family: var(--font-inter);
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      color: var(--white);
+      background: var(--pink-800);
+      padding: 0.5rem 1.5rem;
+      border-radius: var(--radius-full);
+      transition: background 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav-login:hover { background: var(--rose-950); }
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+      flex-shrink: 0;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--rose-800);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ─── HERO ───────────────────────────────────────────────── */
+    .hero {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 3rem 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .hero-text { width: 100%; }
+    .hero-text h1 {
+      font-family: var(--font-jakarta);
+      font-weight: 700;
+      font-size: clamp(1.75rem, 4vw, 3rem);
+      color: var(--stone-900);
+      margin-bottom: 0.75rem;
+    }
+    .hero-text p {
+      font-size: 1rem;
+      color: var(--stone-600);
+      line-height: 1.6;
+      max-width: 60ch;
+      margin: 0 auto;
+    }
+
+    /* ─── MAIN CONTENT ───────────────────────────────────────── */
+    .main-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 3rem 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* ─── STATS ──────────────────────────────────────────────── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.9);
+      border-radius: var(--radius-xl);
+      outline: 1px solid rgba(214,211,209,0.2);
+      backdrop-filter: blur(6px);
+      box-shadow: var(--shadow-rose);
+      padding: 1.5rem;
+    }
+    .stat-label {
+      font-size: 0.875rem;
+      color: rgba(87,83,78,0.6);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .stat-value { font-size: 1.5rem; font-weight: 700; }
+    .stat-value.pink { color: var(--pink-800); }
+    .stat-value.rose { color: var(--rose-700); }
+    .stat-value.dark { color: var(--pink-950); }
+
+    /* ─── TABLE ──────────────────────────────────────────────── */
+    .table-card {
+      background: rgba(255,255,255,0.9);
+      border-radius: var(--radius-xl);
+      outline: 1px solid rgba(214,211,209,0.3);
+      backdrop-filter: blur(6px);
+      box-shadow: var(--shadow-rose);
+      overflow: hidden;
+    }
+    .table-wrapper { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 640px; }
+    thead tr { background: var(--rose-950); }
+    thead th {
+      padding: 1rem 1.5rem;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.875rem;
+      color: #fca5a5;
+      white-space: nowrap;
+    }
+    thead th:last-child { text-align: center; }
+    tbody tr { border-top: 1px solid rgba(214,211,209,0.2); transition: background 0.15s; }
+    tbody tr:hover { background: rgba(252,231,243,0.3); }
+    tbody td { padding: 1.25rem 1.5rem; font-size: 0.9375rem; vertical-align: middle; }
+    .td-name { font-weight: 600; color: var(--pink-800); line-height: 1.4; }
+    .badge {
+      display: inline-block;
+      padding: 2px 0.75rem;
+      border-radius: var(--radius-full);
+      background: var(--red-100);
+      color: var(--red-950);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .status-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-size: 0.9375rem;
+      font-weight: 500;
+    }
+    .status-dot::before {
+      content: '';
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+    .status-dot.active  { color: var(--pink-800); }
+    .status-dot.active::before  { background: var(--pink-800); }
+    .status-dot.completed { color: rgba(87,83,78,0.6); }
+    .status-dot.completed::before { background: var(--stone-500); }
+    .td-actions { text-align: center; }
+    .btn-action {
+      width: 2rem; height: 2rem;
+      background: rgba(254,205,211,0.3);
+      border-radius: var(--radius-lg);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .btn-action:hover { background: rgba(254,205,211,0.6); }
+    .btn-action svg { width: 14px; height: 14px; }
+    .table-footer {
+      padding: 1rem 1.5rem;
+      background: rgba(255,241,242,0.5);
+      border-top: 1px solid rgba(214,211,209,0.2);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .page-btn {
+      padding: 0.375rem 0.625rem;
+      border-radius: var(--radius-lg);
+      outline: 1px solid var(--stone-300);
+      background: white;
+      font-size: 0.875rem;
+      color: var(--stone-900);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .page-btn:hover { background: var(--rose-50); }
+
+    /* ─── FORM SECTION BG ────────────────────────────────────── */
+    .form-section-wrapper {
+      position: relative;
+      background: var(--rose-700);
+    }
+    /* SVG wave on top — convex arc curving upward */
+    .form-wave {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      /* sits above the red bg, same red fill */
+    }
+    .form-wave svg {
+      display: block;
+      width: 100%;
+      height: clamp(48px, 6vw, 88px);
+    }
+    .form-section-bg {
+      padding: 0 3rem 3rem;
+    }
+    .add-record-header {
+      max-width: 1280px;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .add-record-header h2 {
+      font-family: var(--font-poppins);
+      font-weight: 700;
+      font-size: clamp(1.5rem, 3vw, 1.875rem);
+      color: var(--white);
+    }
+    .add-record-icon { width: 1.25rem; height: 1.25rem; fill: var(--pink-100); }
+
+    .form-card {
+      max-width: 960px;
+      margin: 0 auto;
+      background: var(--pink-100);
+      border-radius: var(--radius-xl);
+      outline: 1px solid rgba(214,211,209,0.3);
+      backdrop-filter: blur(6px);
+      box-shadow: var(--shadow-rose);
+      padding: 1.5rem;
+    }
+    .form-grid { display: flex; flex-direction: column; gap: 1.25rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.375rem; }
+    .form-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--stone-600);
+      letter-spacing: 0.08em;
+    }
+    .form-input {
+      width: 100%;
+      padding: 0.875rem 0.75rem;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      outline: 1px solid var(--stone-300);
+      border: none;
+      font-size: 1rem;
+      font-family: var(--font-inter);
+      color: var(--stone-900);
+      transition: outline-color 0.2s, box-shadow 0.2s;
+    }
+    .form-input::placeholder { color: #9ca3af; }
+    .form-input:focus {
+      outline: 2px solid var(--pink-800);
+      box-shadow: 0 0 0 3px rgba(157,23,77,0.1);
+    }
+    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    /* ─── CUSTOM DROPDOWN ────────────────────────────────────── */
+    /*
+      States (from Figma):
+      Default   : white bg, stone-300 outline
+      Hover     : black/10 bg, stone-300 outline
+      Open      : chevron rotates 180°, dropdown list appears below
+      Item default  : white bg, stone-300 outline
+      Item hover    : black/10 bg
+      Item selected : white bg, black left-border 5px (no outline)
+    */
+    .custom-select {
+      position: relative;
+      width: 100%;
+      font-family: var(--font-inter);
+      font-size: 1rem;
+      color: var(--stone-900);
+      user-select: none;
+      z-index: 10;
+    }
+    .custom-select.open { z-index: 150; }
+
+    /* Trigger button */
+    .cs-trigger {
+      width: 100%;
+      height: 3rem;
+      padding: 0 2.75rem 0 0.8125rem;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      outline: 1px solid var(--stone-300);
+      border: none;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.15s, outline-color 0.15s;
+      text-align: left;
+      font-family: var(--font-inter);
+      font-size: 1rem;
+      color: var(--stone-900);
+      position: relative;
+    }
+    .cs-trigger:hover { background: rgba(0,0,0,0.06); }
+    .custom-select.open .cs-trigger { outline-color: var(--stone-300); }
+
+    /* Chevron */
+    .cs-chevron {
+      position: absolute;
+      right: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 10px;
+      height: 10px;
+      pointer-events: none;
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+    }
+    .cs-chevron path { stroke: #6b7280; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .custom-select.open .cs-chevron { transform: translateY(-50%) rotate(180deg); }
+
+    /* Dropdown list */
+    .cs-list {
+      display: none;
+      position: absolute;
+      top: calc(100% + 2px);
+      left: 0;
+      width: 100%;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      overflow: hidden;
+      z-index: 150;
+      animation: ddFadeIn 0.15s ease;
+    }
+    @keyframes ddFadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .custom-select.open .cs-list { display: block; }
+
+    /* Each option item */
+    .cs-option {
+      height: 3rem;
+      padding: 0 0.8125rem;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-family: var(--font-inter);
+      font-size: 1rem;
+      color: var(--stone-900);
+      background: var(--white);
+      outline: 1px solid var(--stone-300);
+      transition: background 0.12s;
+      border-left: 5px solid transparent;
+    }
+    .cs-option:hover { background: rgba(0,0,0,0.06); }
+
+    /* Selected item state: bold text + black left border + no outline */
+    .cs-option[aria-selected="true"] {
+      font-weight: 700;
+      border-left: 5px solid var(--black);
+      outline: none;
+      background: var(--white);
+    }
+    .cs-option[aria-selected="true"]:hover { background: rgba(0,0,0,0.06); }
+
+    /* Placeholder text in trigger */
+    .cs-trigger .cs-placeholder { color: #9ca3af; font-weight: 400; }
+
+    /* ─── LEVEL RADIO PILLS ──────────────────────────────────── */
+    .level-group { display: flex; flex-wrap: wrap; gap: 0.625rem; padding-top: 0.5rem; }
+    .level-pill input[type="radio"] { display: none; }
+    .level-pill label {
+      display: inline-block;
+      padding: 0.375rem 1rem;
+      border-radius: var(--radius-full);
+      outline: 1px solid var(--stone-300);
+      font-size: 0.875rem;
+      color: var(--stone-900);
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--white);
+      user-select: none;
+    }
+    .level-pill input[type="radio"]:checked + label {
+      background: var(--pink-800);
+      color: var(--white);
+      outline-color: var(--pink-800);
+      font-weight: 600;
+    }
+    .level-pill label:hover { background: rgba(0,0,0,0.06); outline-color: var(--pink-800); }
+
+    /* ─── SAVE BUTTON ────────────────────────────────────────── */
+    .btn-save {
+      width: 100%;
+      padding: 1rem;
+      background: var(--pink-800);
+      color: var(--white);
+      font-family: var(--font-inter);
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: var(--radius-xl);
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-save:hover  { background: var(--rose-950); }
+    .btn-save:active { transform: scale(0.99); }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    footer { background: var(--rose-950); }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 3rem;
+      border-top: 1px solid rgba(214,211,209,0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .footer-brand h3 {
+      font-family: var(--font-jakarta);
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #fee2e2;
+      margin-bottom: 0.75rem;
+    }
+    .footer-brand p { font-size: 1rem; color: rgba(254,226,226,0.8); line-height: 1.6; max-width: 28ch; }
+    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; }
+    .footer-links a { font-size: 1rem; color: rgba(254,226,226,0.8); transition: color 0.2s; }
+    .footer-links a:hover { color: #fee2e2; }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .nav-inner, .hero, .main-content { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .form-section-bg { padding-left: 1.5rem; padding-right: 1.5rem; padding-top: 0; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: white;
+        padding: 1.5rem;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        z-index: 99;
+      }
+      .nav-links.open { display: flex; }
+      .nav-login { display: none; }
+      .nav-toggle { display: flex; }
+      .site-header { position: relative; }
+      .hero { padding: 2rem 1rem 1.5rem; }
+      .hero-text p { margin: 0 auto; }
+      .main-content { padding: 0 1rem 3rem; }
+      .form-section-bg { padding: 0 1rem 2rem; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .form-row-2 { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; gap: 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .nav-inner { padding: 1rem; }
+      thead th, tbody td { padding: 0.875rem 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header class="site-header">
+  <nav class="nav-inner" aria-label="Main navigation">
+    <a href="index.html" class="nav-logo">SheRise</a>
+    <ul class="nav-links" id="navLinks" role="list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="girl-spot.html">Girls Spot</a></li>
+      <li><a href="my-record.html" class="active" aria-current="page">My Record</a></li>
+      <li><a href="career-plan.html">Career Plan</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <a href="login.html" class="nav-login">Login</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero" aria-label="Page introduction">
+  <div class="hero-text">
+    <h1>List Out What You Did!</h1>
+    <p>The heart of SheRise where community meets opportunity. Join circles, find mentors, and share your path.</p>
+  </div>
+</section>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main>
+  <div class="main-content">
+
+    <!-- Stats -->
+    <section class="stats-row" aria-label="Quick stats">
+      <article class="stat-card">
+        <p class="stat-label">TOTAL RECORDS</p>
+        <p class="stat-value pink">24</p>
+      </article>
+      <article class="stat-card">
+        <p class="stat-label">ACHIEVEMENTS</p>
+        <p class="stat-value rose">08</p>
+      </article>
+      <article class="stat-card">
+        <p class="stat-label">CERTIFICATIONS</p>
+        <p class="stat-value dark">12</p>
+      </article>
+      <article class="stat-card">
+        <p class="stat-label">PROJECTS</p>
+        <p class="stat-value rose">04</p>
+      </article>
+    </section>
+
+    <!-- Table -->
+    <section class="table-card" aria-label="Recorded activities">
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">SEM</th>
+              <th scope="col">NAME</th>
+              <th scope="col">CATEGORY</th>
+              <th scope="col">YEAR</th>
+              <th scope="col">RESULT</th>
+              <th scope="col">STATUS</th>
+              <th scope="col">ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>3</td>
+              <td class="td-name">Global Women<br>in Tech</td>
+              <td><span class="badge">Internship</span></td>
+              <td>2024</td>
+              <td>Product Intern</td>
+              <td><span class="status-dot active">Active</span></td>
+              <td class="td-actions">
+                <button class="btn-action" aria-label="Edit record">
+                  <svg viewBox="0 0 14 16" fill="none"><path d="M1 14.5L5 10.5M9 2L12 5L5.5 11.5L2 12L2.5 8.5L9 2Z" stroke="#b91c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td class="td-name">National Debate<br>Contest</td>
+              <td><span class="badge">Achievement</span></td>
+              <td>2023</td>
+              <td>1st Runner Up</td>
+              <td><span class="status-dot completed">Completed</span></td>
+              <td class="td-actions">
+                <button class="btn-action" aria-label="Edit record">
+                  <svg viewBox="0 0 14 16" fill="none"><path d="M1 14.5L5 10.5M9 2L12 5L5.5 11.5L2 12L2.5 8.5L9 2Z" stroke="#b91c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td class="td-name">Student Board<br>Council</td>
+              <td><span class="badge">Organization</span></td>
+              <td>2023</td>
+              <td>Secretary Gen</td>
+              <td><span class="status-dot completed">Completed</span></td>
+              <td class="td-actions">
+                <button class="btn-action" aria-label="Edit record">
+                  <svg viewBox="0 0 14 16" fill="none"><path d="M1 14.5L5 10.5M9 2L12 5L5.5 11.5L2 12L2.5 8.5L9 2Z" stroke="#b91c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td class="td-name">Certified Cloud<br>Architect</td>
+              <td><span class="badge">Certificate</span></td>
+              <td>2022</td>
+              <td>AWS Associate</td>
+              <td><span class="status-dot completed">Completed</span></td>
+              <td class="td-actions">
+                <button class="btn-action" aria-label="Edit record">
+                  <svg viewBox="0 0 14 16" fill="none"><path d="M1 14.5L5 10.5M9 2L12 5L5.5 11.5L2 12L2.5 8.5L9 2Z" stroke="#b91c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-footer">
+        <button class="page-btn" aria-label="Previous page">‹</button>
+        <button class="page-btn" aria-label="Next page">›</button>
+      </div>
+    </section>
+
+  </div><!-- /main-content -->
+
+  <!-- ══════════════ FORM SECTION ══════════════ -->
+  <div class="form-section-wrapper">
+    <!-- Convex arc wave — stone-50 background "bites" into the red -->
+    <div class="form-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Stone-50 fills from top down, with bottom edge curving downward in the center -->
+        <path d="M0,0 L1440,0 L1440,20 Q720,100 0,20 Z" fill="#fafaf9"/>
+      </svg>
+    </div>
+  <div class="form-section-bg">
+    <div class="add-record-header">
+      <svg class="add-record-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+      </svg>
+      <h2>Add New Record</h2>
+    </div>
+
+    <section class="form-card" aria-label="Add new record form">
+      <form class="form-grid" id="recordForm" novalidate>
+
+        <!-- SEMESTER custom dropdown -->
+        <div class="form-group">
+          <span class="form-label" id="lbl-semester">SEMESTER</span>
+          <div
+            class="custom-select"
+            role="combobox"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-labelledby="lbl-semester"
+            data-name="semester"
+          >
+            <button type="button" class="cs-trigger" aria-label="Select semester">
+              <span class="cs-placeholder">Select semester</span>
+              <svg class="cs-chevron" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg>
+            </button>
+            <ul class="cs-list" role="listbox" aria-label="Semester options">
+              <li class="cs-option" role="option" aria-selected="false">Semester 1</li>
+              <li class="cs-option" role="option" aria-selected="false">Semester 2</li>
+              <li class="cs-option" role="option" aria-selected="false">Semester 3</li>
+              <li class="cs-option" role="option" aria-selected="false">Semester 4</li>
+              <li class="cs-option" role="option" aria-selected="false">Semester 5</li>
+              <li class="cs-option" role="option" aria-selected="false">Semester 6</li>
+              <li class="cs-option" role="option" aria-selected="false">Semester 7</li>
+              <li class="cs-option" role="option" aria-selected="false">Semester 8</li>
+            </ul>
+            <input type="hidden" name="semester" />
+          </div>
+        </div>
+
+        <!-- ACTIVITY NAME -->
+        <div class="form-group">
+          <label for="activity" class="form-label">ACTIVITY NAME</label>
+          <input id="activity" name="activity" type="text" class="form-input" placeholder="e.g. National UX Design Competition" required />
+        </div>
+
+        <!-- YEAR + CATEGORY -->
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="year" class="form-label">YEAR</label>
+            <input id="year" name="year" type="number" class="form-input" placeholder="2024" min="2000" max="2099" required />
+          </div>
+          <div class="form-group">
+            <span class="form-label" id="lbl-category">CATEGORY</span>
+            <div
+              class="custom-select"
+              role="combobox"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-labelledby="lbl-category"
+              data-name="category"
+            >
+              <button type="button" class="cs-trigger" aria-label="Select category">
+                <span class="cs-placeholder">Category</span>
+                <svg class="cs-chevron" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg>
+              </button>
+              <ul class="cs-list" role="listbox" aria-label="Category options">
+                <li class="cs-option" role="option" aria-selected="false">Achievement</li>
+                <li class="cs-option" role="option" aria-selected="false">Certificate</li>
+                <li class="cs-option" role="option" aria-selected="false">Internship</li>
+                <li class="cs-option" role="option" aria-selected="false">Organization</li>
+                <li class="cs-option" role="option" aria-selected="false">Project</li>
+                <li class="cs-option" role="option" aria-selected="false">Competition</li>
+              </ul>
+              <input type="hidden" name="category" />
+            </div>
+          </div>
+        </div>
+
+        <!-- LEVEL -->
+        <div class="form-group">
+          <span class="form-label" id="level-label">LEVEL</span>
+          <div class="level-group" role="radiogroup" aria-labelledby="level-label">
+            <div class="level-pill">
+              <input type="radio" id="level-campus" name="level" value="Campus" />
+              <label for="level-campus">Campus</label>
+            </div>
+            <div class="level-pill">
+              <input type="radio" id="level-national" name="level" value="National" />
+              <label for="level-national">National</label>
+            </div>
+            <div class="level-pill">
+              <input type="radio" id="level-international" name="level" value="International" />
+              <label for="level-international">International</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- RESULT / POSITION -->
+        <div class="form-group">
+          <label for="result" class="form-label">RESULT / POSITION</label>
+          <input id="result" name="result" type="text" class="form-input" placeholder="e.g. 1st Winner, Lead Designer" />
+        </div>
+
+        <!-- STATUS custom dropdown -->
+        <div class="form-group">
+          <span class="form-label" id="lbl-status">STATUS</span>
+          <div
+            class="custom-select"
+            role="combobox"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-labelledby="lbl-status"
+            data-name="status"
+          >
+            <button type="button" class="cs-trigger" aria-label="Select status">
+              <span class="cs-placeholder">Status</span>
+              <svg class="cs-chevron" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg>
+            </button>
+            <ul class="cs-list" role="listbox" aria-label="Status options">
+              <li class="cs-option" role="option" aria-selected="false">Active</li>
+              <li class="cs-option" role="option" aria-selected="false">Completed</li>
+              <li class="cs-option" role="option" aria-selected="false">In Progress</li>
+            </ul>
+            <input type="hidden" name="status" />
+          </div>
+        </div>
+
+        <!-- SAVE -->
+        <button type="submit" class="btn-save">Save</button>
+
+      </form>
+    </section>
+  </div><!-- /form-section-bg -->
+  </div><!-- /form-section-wrapper -->
+</main>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>SheRise</h3>
+      <p>© 2024 SheRise. Empowering every woman to track her journey and own her story.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Contact Us</a>
+      <a href="#">Resources</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  /* ── Hamburger ─────────────────────────────── */
+  const navToggle = document.getElementById('navToggle');
+  const navLinks  = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  document.addEventListener('click', (e) => {
+    if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  /* ── Custom Select ─────────────────────────── */
+  function initCustomSelects() {
+    document.querySelectorAll('.custom-select').forEach(sel => {
+      const trigger  = sel.querySelector('.cs-trigger');
+      const list     = sel.querySelector('.cs-list');
+      const hidden   = sel.querySelector('input[type="hidden"]');
+      const spanText = trigger.querySelector('span');
+
+      // Toggle open/close
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = sel.classList.contains('open');
+        closeAllSelects();
+        if (!isOpen) openSelect(sel);
+      });
+
+      // Option click
+      list.querySelectorAll('.cs-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+          // Update selected state on all sibling options
+          list.querySelectorAll('.cs-option').forEach(o => o.setAttribute('aria-selected', 'false'));
+          opt.setAttribute('aria-selected', 'true');
+
+          // Update trigger text — remove placeholder class
+          spanText.textContent = opt.textContent;
+          spanText.classList.remove('cs-placeholder');
+
+          // Update hidden input
+          hidden.value = opt.textContent.trim();
+
+          closeAllSelects();
+          trigger.focus();
+        });
+
+        // Keyboard nav inside list
+        opt.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); opt.click(); }
+          if (e.key === 'ArrowDown') { e.preventDefault(); (opt.nextElementSibling || opt).focus(); }
+          if (e.key === 'ArrowUp')   { e.preventDefault(); (opt.previousElementSibling || opt).focus(); }
+          if (e.key === 'Escape')    { closeAllSelects(); trigger.focus(); }
+        });
+        opt.setAttribute('tabindex', '-1');
+      });
+
+      // Keyboard: open with Enter/Space/Arrow
+      trigger.addEventListener('keydown', (e) => {
+        if (['Enter', ' ', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
+          e.preventDefault();
+          if (!sel.classList.contains('open')) {
+            closeAllSelects();
+            openSelect(sel);
+            // Focus first or selected option
+            const focused = list.querySelector('[aria-selected="true"]') || list.querySelector('.cs-option');
+            if (focused) focused.focus();
+          }
+        }
+        if (e.key === 'Escape') closeAllSelects();
+      });
+    });
+
+    // Close on outside click
+    document.addEventListener('click', closeAllSelects);
+  }
+
+  function openSelect(sel) {
+    sel.classList.add('open');
+    sel.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeAllSelects() {
+    document.querySelectorAll('.custom-select.open').forEach(s => {
+      s.classList.remove('open');
+      s.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  /* ── Form Submit ───────────────────────────── */
+  document.getElementById('recordForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const fd = new FormData(this);
+    const data = Object.fromEntries(fd.entries());
+    // Also grab radio
+    const level = this.querySelector('input[name="level"]:checked');
+    if (level) data.level = level.value;
+    alert('Record saved!\n\n' + JSON.stringify(data, null, 2));
+    this.reset();
+    // Reset custom dropdowns
+    document.querySelectorAll('.custom-select').forEach(sel => {
+      const trigger = sel.querySelector('.cs-trigger span');
+      const hidden  = sel.querySelector('input[type="hidden"]');
+      const placeholder = sel.dataset.name === 'semester' ? 'Select semester'
+                        : sel.dataset.name === 'category' ? 'Category'
+                        : 'Status';
+      trigger.textContent = placeholder;
+      trigger.classList.add('cs-placeholder');
+      hidden.value = '';
+      sel.querySelectorAll('.cs-option').forEach(o => o.setAttribute('aria-selected','false'));
+    });
+  });
+
+  initCustomSelects();
+</script>
+</body>
+</html>
