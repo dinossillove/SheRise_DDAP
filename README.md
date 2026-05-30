@@ -71,8 +71,9 @@ git push origin main
 ## ⚠️ Aturan Emas (Golden Rules)
 
 1. **Jangan membuat folder baru untuk aset.** Folder `assets/images/` sudah disiapkan untuk menampung seluruh gambar proyek kita.
-2. **Gunakan FontAwesome.** Kita sudah memasang CDN FontAwesome di bagian `<head>` halaman, jadi kamu tinggal panggil class-nya saja jika butuh ikon (contoh: `<i class="fas fa-user"></i>`).
-3. **Konfirmasi di grup.** Selalu kabari tim di grup chat setelah kamu melakukan `git push` agar yang lain bisa langsung melakukan `git pull`.
+2. **Tipografi Wajib (Sesuai UI Kit).** Kita menggunakan kombinasi standar industri: **Poppins** untuk semua *Heading* (`h1` sampai `h6`) dan Logo, serta **Inter** untuk teks paragraf (*Body text*). Pastikan *link import* Google Fonts-nya selalu disalin ke setiap halaman baru!
+3. **Gunakan FontAwesome.** Kita sudah memasang CDN FontAwesome di bagian `<head>` halaman, jadi kamu tinggal panggil class-nya saja jika butuh ikon (contoh: `<i class="fas fa-user"></i>`). Jangan pakai gambar PNG untuk ikon biasa.
+4. **Konfirmasi di grup.** Selalu kabari tim di grup chat setelah kamu melakukan `git push` agar yang lain bisa langsung melakukan `git pull`.
 
 *Selamat ngoding, teman-teman! Mari kita selesaikan proyek SheRise ini dengan lancar dan kompak!* 🔥
 
