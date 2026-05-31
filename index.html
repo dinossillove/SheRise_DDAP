@@ -141,6 +141,39 @@
       transition: opacity .7s ease, transform .7s ease;
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Nav link hover underline animation (same as my-record.html) ── */
+    .nav-link {
+      color: #be123c;           /* rose-700 */
+      font-weight: 400;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+      text-decoration: none;
+    }
+    .nav-link:hover {
+      color: #9d174d;           /* pink-800 */
+      border-bottom: 2px solid #9d174d;
+    }
+    /* Active state (set by JS) */
+    .nav-link.active-page,
+    .nav-link[aria-current="page"] {
+      font-weight: 700;
+      color: #9d174d;
+      border-bottom: 2px solid #9d174d;
+    }
+    /* Mobile nav link hover */
+    .nav-link-mobile {
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .nav-link-mobile:hover { color: #9d174d; font-weight: 600; }
+
+    /* Card link wrapper — remove default anchor styling */
+    .card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
   </style>
 </head>
 <body class="antialiased">
@@ -398,6 +431,7 @@
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
+        <a href="career-plan.html" class="card-link">
         <article class="feature-card rounded-2xl overflow-hidden border border-rose-muted shadow-sm cursor-pointer bg-white">
           <div class="relative overflow-hidden">
             <!-- assets/images/img_home_careerplan.jpg -->
@@ -414,7 +448,9 @@
             </p>
           </div>
         </article>
+        </a>
 
+        <a href="girl-spot.html" class="card-link">
         <article class="feature-card rounded-2xl overflow-hidden border border-rose-muted shadow-sm cursor-pointer bg-white">
           <div class="relative overflow-hidden">
             <!-- assets/images/img_home_girlspotlight.jpg -->
@@ -431,8 +467,10 @@
             </p>
           </div>
         </article>
+        </a>
 
-        <article class="feature-card rounded-2xl overflow-hidden border border-rose-muted shadow-sm cursor-pointer bg-white sm:col-span-2 lg:col-span-1">
+        <a href="my-record.html" class="card-link sm:col-span-2 lg:col-span-1">
+        <article class="feature-card rounded-2xl overflow-hidden border border-rose-muted shadow-sm cursor-pointer bg-white">
           <div class="relative overflow-hidden">
             <!-- assets/images/img_home_recordtrack.jpg -->
             <img src="assets/images/img_home_recordtrack.jpg" alt="Record Track"
@@ -448,6 +486,7 @@
             </p>
           </div>
         </article>
+        </a>
 
       </div>
     </div>
