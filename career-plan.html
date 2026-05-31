@@ -21,22 +21,148 @@
         h1, h2, h3, h4, h5, h6, .font-poppins {
             font-family: 'Poppins', sans-serif;
         }
+    
+    /* ─── SHERISE HEADER ─────────────────────────────────────── */
+    .sr-header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: #ffffff;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 1px 2px 0 rgba(65,0,7,0.05);
+      font-family: 'Inter', sans-serif;
+    }
+    .sr-nav-inner {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .sr-nav-logo {
+      font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      line-height: 2rem;
+      color: #9f1239;
+      white-space: nowrap;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    .sr-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+      margin: 0; padding: 0;
+    }
+    .sr-nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5rem;
+      color: #be123c;
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .sr-nav-links a.sr-active {
+      font-weight: 700;
+      color: #9d174d;
+      border-bottom: 2px solid #9d174d;
+    }
+    .sr-nav-links a:hover {
+      color: #9d174d;
+      border-bottom-color: #9d174d;
+    }
+    .sr-nav-login {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      color: #ffffff;
+      background: #9d174d;
+      padding: 0.5rem 1.5rem;
+      border-radius: 9999px;
+      transition: background 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+    }
+    .sr-nav-login:hover { background: #4c0519; }
+    .sr-nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+      flex-shrink: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .sr-nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #9f1239;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    @media (max-width: 1024px) {
+      .sr-nav-inner { padding: 1rem 1.5rem; }
+    }
+    @media (max-width: 768px) {
+      .sr-nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: white;
+        padding: 1.5rem;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        z-index: 99;
+      }
+      .sr-nav-links.sr-open { display: flex; }
+      .sr-nav-login { display: none; }
+      .sr-nav-toggle { display: flex; }
+      .sr-header { position: relative; }
+    }
+    @media (max-width: 480px) {
+      .sr-nav-inner { padding: 1rem; }
+    }
+
     </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="text-gray-800 antialiased">
 
-    <nav id="cp-navbar" class="bg-white border-b border-rose-100 py-4 px-6 md:px-16 flex justify-between items-center sticky top-0 z-50 shadow-xs">
-        <div class="font-poppins text-2xl font-extrabold text-[#8B1E34] tracking-tight">SheRise</div>
-        <div class="hidden md:flex space-x-8 font-semibold text-gray-500 text-sm">
-            <a href="index.html" class="hover:text-[#8B1E34] transition">Home</a>
-            <a href="girl-spot.html" class="hover:text-[#8B1E34] transition">Girls Spot</a>
-            <a href="my-record.html" class="hover:text-[#8B1E34] transition">My Record</a>
-            <a href="career-plan.html" class="text-[#8B1E34] border-b-2 border-[#8B1E34] pb-1">Career Plan</a>
+    <header class="sr-header">
+      <nav class="sr-nav-inner" aria-label="Main navigation">
+        <a href="index.html" class="sr-nav-logo">SheRise</a>
+        <ul class="sr-nav-links" id="srNavLinks" role="list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="girl-spot.html">Girls Spot</a></li>
+          <li><a href="my-record.html">My Record</a></li>
+          <li><a href="career-plan.html" class="sr-active" aria-current="page">Career Plan</a></li>
+        </ul>
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <a href="login.html" class="sr-nav-login">Login</a>
+          <button class="sr-nav-toggle" id="srNavToggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
         </div>
-        <button class="btn-cp-login bg-[#8B1E34] text-white px-7 py-2 rounded-full font-semibold text-sm hover:bg-[#6B1525] transition shadow-xs cursor-pointer">
-            Login
-        </button>
-    </nav>
+      </nav>
+    </header>
 
     <section id="cp-hero" class="py-10 px-4 md:px-16 flex flex-col items-center text-center max-w-5xl mx-auto">
         <div class="w-full mb-8">
@@ -206,6 +332,25 @@
             </div>
         </div>
     </footer>
+
+
+  <script>
+    (function() {
+      var toggle = document.getElementById('srNavToggle');
+      var links  = document.getElementById('srNavLinks');
+      if (!toggle || !links) return;
+      toggle.addEventListener('click', function() {
+        var open = links.classList.toggle('sr-open');
+        toggle.setAttribute('aria-expanded', open);
+      });
+      document.addEventListener('click', function(e) {
+        if (!toggle.contains(e.target) && !links.contains(e.target)) {
+          links.classList.remove('sr-open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
 
 </body>
 </html>

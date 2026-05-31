@@ -266,6 +266,74 @@
     }
     .btn-action:hover { background: rgba(254,205,211,0.6); }
     .btn-action svg { width: 14px; height: 14px; }
+    /* Delete button */
+    .btn-delete {
+      width: 2rem; height: 2rem;
+      background: rgba(254,202,202,0.35);
+      border-radius: var(--radius-lg);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      border: none;
+      cursor: pointer;
+      margin-left: 4px;
+    }
+    .btn-delete:hover { background: rgba(239,68,68,0.18); }
+    .btn-delete svg { width: 13px; height: 13px; }
+    /* Row slide-in animation */
+    @keyframes rowIn {
+      from { opacity: 0; transform: translateX(-12px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .row-new { animation: rowIn 0.35s ease both; }
+    /* Row delete animation */
+    @keyframes rowOut {
+      from { opacity: 1; transform: translateX(0); }
+      to   { opacity: 0; transform: translateX(16px); }
+    }
+    .row-removing { animation: rowOut 0.28s ease forwards; }
+    /* Toast notification */
+    .sr-toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #1c1917;
+      color: #fff;
+      font-family: var(--font-inter);
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-full);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+      opacity: 0;
+      transition: opacity 0.25s, transform 0.25s;
+      z-index: 9999;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .sr-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    /* Empty state */
+    .table-empty {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: rgba(87,83,78,0.5);
+      font-size: 0.9375rem;
+      font-style: italic;
+    }
+    /* Validation error */
+    .form-input.error, .custom-select.error .cs-trigger {
+      outline: 2px solid #ef4444 !important;
+    }
+    .field-error {
+      font-size: 0.75rem;
+      color: #ef4444;
+      margin-top: 2px;
+    }
     .table-footer {
       padding: 1rem 1.5rem;
       background: rgba(255,241,242,0.5);
@@ -603,19 +671,19 @@
     <section class="stats-row" aria-label="Quick stats">
       <article class="stat-card">
         <p class="stat-label">TOTAL RECORDS</p>
-        <p class="stat-value pink">24</p>
+        <p class="stat-value pink" data-stat="total">24</p>
       </article>
       <article class="stat-card">
         <p class="stat-label">ACHIEVEMENTS</p>
-        <p class="stat-value rose">08</p>
+        <p class="stat-value rose" data-stat="achievements">08</p>
       </article>
       <article class="stat-card">
         <p class="stat-label">CERTIFICATIONS</p>
-        <p class="stat-value dark">12</p>
+        <p class="stat-value dark" data-stat="certifications">12</p>
       </article>
       <article class="stat-card">
         <p class="stat-label">PROJECTS</p>
-        <p class="stat-value rose">04</p>
+        <p class="stat-value rose" data-stat="projects">04</p>
       </article>
     </section>
 
@@ -633,7 +701,7 @@
               <th scope="col">ACTIONS</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="recordTableBody">
             <tr>
               <td>3</td>
               <td class="td-name">Global Women<br>in Tech</td>
@@ -644,6 +712,9 @@
               <td class="td-actions">
                 <button class="btn-action" aria-label="Edit record">
                   <svg viewBox="0 0 14 16" fill="none"><path d="M1 14.5L5 10.5M9 2L12 5L5.5 11.5L2 12L2.5 8.5L9 2Z" stroke="#b91c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button class="btn-delete" aria-label="Delete record" onclick="deleteRow(this)">
+                  <svg viewBox="0 0 13 13" fill="none"><path d="M2 2l9 9M11 2l-9 9" stroke="#ef4444" stroke-width="1.6" stroke-linecap="round"/></svg>
                 </button>
               </td>
             </tr>
@@ -658,6 +729,9 @@
                 <button class="btn-action" aria-label="Edit record">
                   <svg viewBox="0 0 14 16" fill="none"><path d="M1 14.5L5 10.5M9 2L12 5L5.5 11.5L2 12L2.5 8.5L9 2Z" stroke="#b91c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
+                <button class="btn-delete" aria-label="Delete record" onclick="deleteRow(this)">
+                  <svg viewBox="0 0 13 13" fill="none"><path d="M2 2l9 9M11 2l-9 9" stroke="#ef4444" stroke-width="1.6" stroke-linecap="round"/></svg>
+                </button>
               </td>
             </tr>
             <tr>
@@ -671,6 +745,9 @@
                 <button class="btn-action" aria-label="Edit record">
                   <svg viewBox="0 0 14 16" fill="none"><path d="M1 14.5L5 10.5M9 2L12 5L5.5 11.5L2 12L2.5 8.5L9 2Z" stroke="#b91c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
+                <button class="btn-delete" aria-label="Delete record" onclick="deleteRow(this)">
+                  <svg viewBox="0 0 13 13" fill="none"><path d="M2 2l9 9M11 2l-9 9" stroke="#ef4444" stroke-width="1.6" stroke-linecap="round"/></svg>
+                </button>
               </td>
             </tr>
             <tr>
@@ -683,6 +760,9 @@
               <td class="td-actions">
                 <button class="btn-action" aria-label="Edit record">
                   <svg viewBox="0 0 14 16" fill="none"><path d="M1 14.5L5 10.5M9 2L12 5L5.5 11.5L2 12L2.5 8.5L9 2Z" stroke="#b91c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button class="btn-delete" aria-label="Delete record" onclick="deleteRow(this)">
+                  <svg viewBox="0 0 13 13" fill="none"><path d="M2 2l9 9M11 2l-9 9" stroke="#ef4444" stroke-width="1.6" stroke-linecap="round"/></svg>
                 </button>
               </td>
             </tr>
@@ -841,8 +921,205 @@
   </div>
 </footer>
 
+<div id="srToast" class="sr-toast" role="status" aria-live="polite"></div>
+
 <script>
-  /* ── Hamburger ─────────────────────────────── */
+  /* ══════════════════════════════════════════════════════
+     STORAGE KEY
+  ══════════════════════════════════════════════════════ */
+  const STORAGE_KEY = 'sherise_records';
+
+  /* ══════════════════════════════════════════════════════
+     STAT CATEGORY MAP — which category counts toward which stat
+  ══════════════════════════════════════════════════════ */
+  const STAT_MAP = {
+    Achievement:  'achievements',
+    Competition:  'achievements',
+    Certificate:  'certifications',
+    Project:      'projects',
+    Internship:   null,
+    Organization: null,
+  };
+
+  /* ══════════════════════════════════════════════════════
+     LOAD / SAVE records from localStorage
+  ══════════════════════════════════════════════════════ */
+  function loadRecords() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch { return []; }
+  }
+  function saveRecords(records) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+  }
+
+  /* ══════════════════════════════════════════════════════
+     STATS — recalculate from live records + static seed
+  ══════════════════════════════════════════════════════ */
+  // Static seed rows (the 4 pre-built rows in HTML)
+  const SEED_STATS = { total: 4, achievements: 1, certifications: 1, projects: 0 };
+
+  function updateStats() {
+    const records = loadRecords();
+    let stats = { ...SEED_STATS };
+    stats.total += records.length;
+    records.forEach(r => {
+      const key = STAT_MAP[r.category];
+      if (key) stats[key]++;
+    });
+    document.querySelector('[data-stat="total"]').textContent    = String(stats.total).padStart(2,'0');
+    document.querySelector('[data-stat="achievements"]').textContent = String(stats.achievements).padStart(2,'0');
+    document.querySelector('[data-stat="certifications"]').textContent = String(stats.certifications).padStart(2,'0');
+    document.querySelector('[data-stat="projects"]').textContent  = String(stats.projects).padStart(2,'0');
+  }
+
+  /* ══════════════════════════════════════════════════════
+     BUILD A TABLE ROW from a record object
+  ══════════════════════════════════════════════════════ */
+  function statusClass(status) {
+    if (status === 'Active')      return 'active';
+    if (status === 'Completed')   return 'completed';
+    if (status === 'In Progress') return 'inprogress';
+    return 'active';
+  }
+
+  function buildRow(record, animate) {
+    const tr = document.createElement('tr');
+    if (animate) tr.classList.add('row-new');
+    // extract semester number
+    const semNum = record.semester ? record.semester.replace(/[^0-9]/g,'') : '—';
+    const sc     = statusClass(record.status);
+    tr.setAttribute('data-id', record.id);
+    tr.innerHTML = `
+      <td>${semNum}</td>
+      <td class="td-name">${escHtml(record.activity)}</td>
+      <td><span class="badge">${escHtml(record.category)}</span></td>
+      <td>${escHtml(record.year)}</td>
+      <td>${escHtml(record.result || '—')}</td>
+      <td><span class="status-dot ${sc}">${escHtml(record.status)}</span></td>
+      <td class="td-actions">
+        <button class="btn-action" aria-label="Edit record" onclick="editRow(this)">
+          <svg viewBox="0 0 14 16" fill="none"><path d="M1 14.5L5 10.5M9 2L12 5L5.5 11.5L2 12L2.5 8.5L9 2Z" stroke="#b91c1c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="btn-delete" aria-label="Delete record" onclick="deleteRow(this)">
+          <svg viewBox="0 0 13 13" fill="none"><path d="M2 2l9 9M11 2l-9 9" stroke="#ef4444" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+      </td>`;
+    return tr;
+  }
+
+  function escHtml(str) {
+    return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  /* ══════════════════════════════════════════════════════
+     RENDER saved records into table (below seed rows)
+  ══════════════════════════════════════════════════════ */
+  function renderSavedRows() {
+    const tbody   = document.getElementById('recordTableBody');
+    const records = loadRecords();
+    // Remove previously rendered dynamic rows (not seed)
+    tbody.querySelectorAll('[data-id]').forEach(r => r.remove());
+    if (records.length === 0) return;
+    records.forEach(rec => tbody.appendChild(buildRow(rec, false)));
+  }
+
+  /* ══════════════════════════════════════════════════════
+     DELETE ROW
+  ══════════════════════════════════════════════════════ */
+  function deleteRow(btn) {
+    const tr = btn.closest('tr');
+    const id = tr.getAttribute('data-id');
+    // Seed rows have no data-id — just animate out
+    tr.classList.add('row-removing');
+    tr.addEventListener('animationend', () => {
+      if (id) {
+        const records = loadRecords().filter(r => r.id !== id);
+        saveRecords(records);
+        updateStats();
+      }
+      tr.remove();
+      checkEmptyState();
+    }, { once: true });
+    showToast('Record deleted');
+  }
+
+  function checkEmptyState() {
+    const tbody = document.getElementById('recordTableBody');
+    const rows  = tbody.querySelectorAll('tr');
+    const existing = tbody.querySelector('.table-empty');
+    if (rows.length === 0 && !existing) {
+      const empty = document.createElement('tr');
+      empty.innerHTML = '<td colspan="7" class="table-empty">No records yet. Add your first one below!</td>';
+      tbody.appendChild(empty);
+    } else if (rows.length > 0 && existing) {
+      existing.remove();
+    }
+  }
+
+  /* ══════════════════════════════════════════════════════
+     EDIT ROW — prefill form with row data
+  ══════════════════════════════════════════════════════ */
+  function editRow(btn) {
+    const tr = btn.closest('tr');
+    const id = tr.getAttribute('data-id');
+    if (!id) return; // seed rows: no edit data
+    const records = loadRecords();
+    const rec = records.find(r => r.id === id);
+    if (!rec) return;
+
+    // Prefill form
+    document.getElementById('activity').value = rec.activity;
+    document.getElementById('year').value     = rec.year;
+    document.getElementById('result').value   = rec.result || '';
+
+    // Set custom selects
+    setCustomSelect('semester', rec.semester);
+    setCustomSelect('category', rec.category);
+    setCustomSelect('status',   rec.status);
+
+    // Set radio
+    const radio = document.querySelector(`input[name="level"][value="${rec.level}"]`);
+    if (radio) radio.checked = true;
+
+    // Mark form as editing
+    document.getElementById('recordForm').setAttribute('data-edit-id', id);
+    document.querySelector('.btn-save').textContent = 'Update Record';
+
+    // Scroll to form
+    document.querySelector('.form-section-wrapper').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    showToast('Editing record — make changes and click Update');
+  }
+
+  function setCustomSelect(name, value) {
+    const sel     = document.querySelector(`.custom-select[data-name="${name}"]`);
+    if (!sel) return;
+    const hidden  = sel.querySelector('input[type="hidden"]');
+    const spanTxt = sel.querySelector('.cs-trigger span');
+    const opts    = sel.querySelectorAll('.cs-option');
+    opts.forEach(o => {
+      const match = o.textContent.trim() === value;
+      o.setAttribute('aria-selected', match ? 'true' : 'false');
+    });
+    hidden.value = value;
+    spanTxt.textContent = value;
+    spanTxt.classList.remove('cs-placeholder');
+  }
+
+  /* ══════════════════════════════════════════════════════
+     TOAST
+  ══════════════════════════════════════════════════════ */
+  let _toastTimer;
+  function showToast(msg) {
+    const t = document.getElementById('srToast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(_toastTimer);
+    _toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  /* ══════════════════════════════════════════════════════
+     HAMBURGER
+  ══════════════════════════════════════════════════════ */
   const navToggle = document.getElementById('navToggle');
   const navLinks  = document.getElementById('navLinks');
   navToggle.addEventListener('click', () => {
@@ -856,7 +1133,9 @@
     }
   });
 
-  /* ── Custom Select ─────────────────────────── */
+  /* ══════════════════════════════════════════════════════
+     CUSTOM SELECT
+  ══════════════════════════════════════════════════════ */
   function initCustomSelects() {
     document.querySelectorAll('.custom-select').forEach(sel => {
       const trigger  = sel.querySelector('.cs-trigger');
@@ -864,7 +1143,6 @@
       const hidden   = sel.querySelector('input[type="hidden"]');
       const spanText = trigger.querySelector('span');
 
-      // Toggle open/close
       trigger.addEventListener('click', (e) => {
         e.stopPropagation();
         const isOpen = sel.classList.contains('open');
@@ -872,25 +1150,18 @@
         if (!isOpen) openSelect(sel);
       });
 
-      // Option click
       list.querySelectorAll('.cs-option').forEach(opt => {
         opt.addEventListener('click', () => {
-          // Update selected state on all sibling options
           list.querySelectorAll('.cs-option').forEach(o => o.setAttribute('aria-selected', 'false'));
           opt.setAttribute('aria-selected', 'true');
-
-          // Update trigger text — remove placeholder class
           spanText.textContent = opt.textContent;
           spanText.classList.remove('cs-placeholder');
-
-          // Update hidden input
           hidden.value = opt.textContent.trim();
-
+          // clear validation error
+          sel.classList.remove('error');
           closeAllSelects();
           trigger.focus();
         });
-
-        // Keyboard nav inside list
         opt.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); opt.click(); }
           if (e.key === 'ArrowDown') { e.preventDefault(); (opt.nextElementSibling || opt).focus(); }
@@ -900,14 +1171,12 @@
         opt.setAttribute('tabindex', '-1');
       });
 
-      // Keyboard: open with Enter/Space/Arrow
       trigger.addEventListener('keydown', (e) => {
         if (['Enter', ' ', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
           e.preventDefault();
           if (!sel.classList.contains('open')) {
             closeAllSelects();
             openSelect(sel);
-            // Focus first or selected option
             const focused = list.querySelector('[aria-selected="true"]') || list.querySelector('.cs-option');
             if (focused) focused.focus();
           }
@@ -915,8 +1184,6 @@
         if (e.key === 'Escape') closeAllSelects();
       });
     });
-
-    // Close on outside click
     document.addEventListener('click', closeAllSelects);
   }
 
@@ -924,7 +1191,6 @@
     sel.classList.add('open');
     sel.setAttribute('aria-expanded', 'true');
   }
-
   function closeAllSelects() {
     document.querySelectorAll('.custom-select.open').forEach(s => {
       s.classList.remove('open');
@@ -932,17 +1198,90 @@
     });
   }
 
-  /* ── Form Submit ───────────────────────────── */
+  /* ══════════════════════════════════════════════════════
+     VALIDATION
+  ══════════════════════════════════════════════════════ */
+  function validateForm(data) {
+    let valid = true;
+    // Clear previous errors
+    document.querySelectorAll('.field-error').forEach(e => e.remove());
+    document.querySelectorAll('.error').forEach(e => e.classList.remove('error'));
+
+    function showError(el, msg) {
+      el.classList.add('error');
+      const err = document.createElement('span');
+      err.className = 'field-error';
+      err.textContent = msg;
+      el.closest('.form-group').appendChild(err);
+      valid = false;
+    }
+
+    if (!data.semester) showError(document.querySelector('.custom-select[data-name="semester"]'), 'Please select a semester');
+    if (!data.activity.trim()) showError(document.getElementById('activity'), 'Activity name is required');
+    if (!data.category) showError(document.querySelector('.custom-select[data-name="category"]'), 'Please select a category');
+    if (!data.year || data.year < 2000 || data.year > 2099) showError(document.getElementById('year'), 'Enter a valid year (2000–2099)');
+    if (!data.status) showError(document.querySelector('.custom-select[data-name="status"]'), 'Please select a status');
+
+    return valid;
+  }
+
+  /* ══════════════════════════════════════════════════════
+     FORM SUBMIT — Save OR Update
+  ══════════════════════════════════════════════════════ */
   document.getElementById('recordForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const fd = new FormData(this);
+    const fd   = new FormData(this);
     const data = Object.fromEntries(fd.entries());
-    // Also grab radio
-    const level = this.querySelector('input[name="level"]:checked');
-    if (level) data.level = level.value;
-    alert('Record saved!\n\n' + JSON.stringify(data, null, 2));
-    this.reset();
-    // Reset custom dropdowns
+    const levelEl = this.querySelector('input[name="level"]:checked');
+    data.level = levelEl ? levelEl.value : '';
+
+    if (!validateForm(data)) return;
+
+    const editId = this.getAttribute('data-edit-id');
+    const records = loadRecords();
+
+    if (editId) {
+      // ── UPDATE existing ──
+      const idx = records.findIndex(r => r.id === editId);
+      if (idx !== -1) {
+        records[idx] = { ...records[idx], ...data };
+        saveRecords(records);
+        // Update existing row in DOM
+        const tbody = document.getElementById('recordTableBody');
+        const oldRow = tbody.querySelector(`[data-id="${editId}"]`);
+        if (oldRow) {
+          const newRow = buildRow(records[idx], true);
+          oldRow.replaceWith(newRow);
+        }
+        showToast('✓ Record updated!');
+      }
+      this.removeAttribute('data-edit-id');
+      document.querySelector('.btn-save').textContent = 'Save';
+    } else {
+      // ── ADD new ──
+      data.id = 'rec_' + Date.now() + '_' + Math.random().toString(36).slice(2,7);
+      records.push(data);
+      saveRecords(records);
+      // Append row to table
+      const tbody = document.getElementById('recordTableBody');
+      tbody.appendChild(buildRow(data, true));
+      checkEmptyState();
+      showToast('✓ Record saved!');
+    }
+
+    updateStats();
+    resetForm(this);
+    // Scroll table into view
+    document.querySelector('.table-card').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  /* ══════════════════════════════════════════════════════
+     RESET FORM
+  ══════════════════════════════════════════════════════ */
+  function resetForm(form) {
+    form.reset();
+    form.removeAttribute('data-edit-id');
+    document.querySelector('.btn-save').textContent = 'Save';
     document.querySelectorAll('.custom-select').forEach(sel => {
       const trigger = sel.querySelector('.cs-trigger span');
       const hidden  = sel.querySelector('input[type="hidden"]');
@@ -953,10 +1292,19 @@
       trigger.classList.add('cs-placeholder');
       hidden.value = '';
       sel.querySelectorAll('.cs-option').forEach(o => o.setAttribute('aria-selected','false'));
+      sel.classList.remove('error');
     });
-  });
+    document.querySelectorAll('.field-error').forEach(e => e.remove());
+    document.querySelectorAll('.form-input.error').forEach(e => e.classList.remove('error'));
+  }
 
+  /* ══════════════════════════════════════════════════════
+     INIT
+  ══════════════════════════════════════════════════════ */
   initCustomSelects();
+  renderSavedRows();
+  updateStats();
+  checkEmptyState();
 </script>
 </body>
 </html>
