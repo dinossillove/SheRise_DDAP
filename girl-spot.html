@@ -4,141 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Girls Spot - SheRise</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <style>
-        /* Import font Inter (Body) dan Poppins (Heading) dari Google Fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap');
-        
-        /* Default body pakai Inter */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FFF9F8;
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              rose: {
+                50: '#fff1f2',
+                100: '#ffe4ec',
+                200: '#f8c5d3',
+                300: '#f0a0b7',
+                400: '#e06e94',
+                500: '#c42f5c',
+                600: '#9d174d',
+                700: '#701337',
+                800: '#4a0e27',
+              }
+            },
+            fontFamily: {
+              heading: ['Poppins', 'sans-serif'],
+              body: ['Inter', 'sans-serif'],
+              logo: ['Plus Jakarta Sans', 'sans-serif'],
+            }
+          }
         }
+      }
+    </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@800&display=swap');
         
-        /* Semua heading otomatis pakai Poppins */
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background: #FFF9F8;
+            color: #1f2937;
+            opacity: 0;
+            transition: opacity .35s ease;
+        }
+        body.page-visible { opacity: 1; }
         h1, h2, h3, h4, h5, h6, .font-poppins {
             font-family: 'Poppins', sans-serif;
         }
+        a { color: inherit; }
+        .page-transition { transition: opacity .35s ease, transform .35s ease; }
+        .page-transition.fade-out { opacity: 0; transform: translateY(12px); }
+        .sr-header { position: sticky; top: 0; z-index: 200; background: #ffffff; backdrop-filter: blur(8px); box-shadow: 0 1px 2px rgba(65,0,7,0.06); }
+        .sr-nav-inner { width: 100%; max-width: 1280px; margin: 0 auto; padding: 1rem 3rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .sr-nav-logo { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1.5rem; line-height: 2rem; color: #9d174d; text-decoration: none; }
+        .sr-nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; margin: 0; padding: 0; }
+        .sr-nav-links a { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 500; line-height: 1.5rem; color: #be123c; padding-bottom: 4px; border-bottom: 2px solid transparent; transition: color .2s ease, border-color .2s ease, transform .2s ease; text-decoration: none; }
+        .sr-nav-links a:hover { color: #9d174d; border-bottom-color: #9d174d; transform: translateY(-1px); }
+        .sr-nav-links a.sr-active { font-weight: 700; color: #9d174d; border-bottom-color: #9d174d; }
+        .sr-nav-login { display: inline-flex; align-items: center; justify-content: center; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; color: #ffffff; background: #9d174d; padding: 0.75rem 1.5rem; border-radius: 9999px; transition: background .2s ease, transform .2s ease; text-decoration: none; }
+        .sr-nav-login:hover { background: #701337; transform: translateY(-1px); }
+        .sr-nav-toggle { display: none; flex-direction: column; gap: 4px; padding: 0.5rem; border: none; background: none; cursor: pointer; }
+        .sr-nav-toggle span { display: block; width: 24px; height: 2px; background: #9d174d; border-radius: 9999px; transition: all .3s ease; }
+        .sr-hero-card { overflow: hidden; border-radius: 2rem; position: relative; }
+        .sr-hero-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at top left, rgba(254,215,232,0.45), transparent 35%), radial-gradient(circle at bottom right, rgba(89,47,87,0.14), transparent 28%); pointer-events: none; }
+        .sr-profile-card { transition: transform .3s ease, box-shadow .3s ease; }
+        .sr-profile-card:hover { transform: translateY(-6px); box-shadow: 0 18px 42px rgba(0,0,0,0.1); }
+        .sr-profile-card img { transition: transform .35s ease; }
+        .sr-profile-card:hover img { transform: scale(1.05); }
+        .sr-divider { height: 1px; background: #f7d4e2; flex: 1; }
+        .sr-footer a { color: inherit; text-decoration: none; transition: color .2s ease; }
+        .sr-footer a:hover { color: #ffffff; }
+        @media (max-width: 1024px) { .sr-nav-inner { padding: 1rem 1.5rem; } }
+        @media (max-width: 768px) {
+          .sr-nav-links { display: none; flex-direction: column; align-items: flex-start; gap: 1rem; position: absolute; top: 100%; left: 0; right: 0; background: white; padding: 1.5rem; box-shadow: 0 18px 32px rgba(0,0,0,0.08); z-index: 99; }
+          .sr-nav-links.sr-open { display: flex; }
+          .sr-nav-login { display: none; }
+          .sr-nav-toggle { display: flex; }
+          .sr-header { position: relative; }
+        }
+        @media (max-width: 480px) { .sr-nav-inner { padding: 1rem; } }
     
-    /* ─── SHERISE HEADER ─────────────────────────────────────── */
-    .sr-header {
-      position: sticky;
-      top: 0;
-      z-index: 200;
-      background: #ffffff;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 1px 2px 0 rgba(65,0,7,0.05);
-      font-family: 'Inter', sans-serif;
-    }
-    .sr-nav-inner {
-      width: 100%;
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 1rem 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .sr-nav-logo {
-      font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-      font-weight: 800;
-      font-size: 1.5rem;
-      line-height: 2rem;
-      color: #9f1239;
-      white-space: nowrap;
-      flex-shrink: 0;
-      text-decoration: none;
-    }
-    .sr-nav-links {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      list-style: none;
-      margin: 0; padding: 0;
-    }
-    .sr-nav-links a {
-      font-family: 'Inter', sans-serif;
-      font-size: 1rem;
-      font-weight: 400;
-      line-height: 1.5rem;
-      color: #be123c;
-      padding-bottom: 4px;
-      border-bottom: 2px solid transparent;
-      transition: color 0.2s, border-color 0.2s;
-      white-space: nowrap;
-      text-decoration: none;
-    }
-    .sr-nav-links a.sr-active {
-      font-weight: 700;
-      color: #9d174d;
-      border-bottom: 2px solid #9d174d;
-    }
-    .sr-nav-links a:hover {
-      color: #9d174d;
-      border-bottom-color: #9d174d;
-    }
-    .sr-nav-login {
-      font-family: 'Inter', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      line-height: 1.5rem;
-      color: #ffffff;
-      background: #9d174d;
-      padding: 0.5rem 1.5rem;
-      border-radius: 9999px;
-      transition: background 0.2s;
-      white-space: nowrap;
-      flex-shrink: 0;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-    }
-    .sr-nav-login:hover { background: #4c0519; }
-    .sr-nav-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      padding: 4px;
-      flex-shrink: 0;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-    .sr-nav-toggle span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: #9f1239;
-      border-radius: 2px;
-      transition: all 0.3s;
-    }
-    @media (max-width: 1024px) {
-      .sr-nav-inner { padding: 1rem 1.5rem; }
-    }
     @media (max-width: 768px) {
-      .sr-nav-links {
-        display: none;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-        position: absolute;
-        top: 100%;
-        left: 0; right: 0;
-        background: white;
-        padding: 1.5rem;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-        z-index: 99;
-      }
+      .sr-nav-links { display: none; flex-direction: column; align-items: flex-start; gap: 1rem; position: absolute; top: 100%; left: 0; right: 0; background: white; padding: 1.5rem; box-shadow: 0 18px 32px rgba(0,0,0,0.08); z-index: 99; }
       .sr-nav-links.sr-open { display: flex; }
       .sr-nav-login { display: none; }
       .sr-nav-toggle { display: flex; }
       .sr-header { position: relative; }
     }
-    @media (max-width: 480px) {
-      .sr-nav-inner { padding: 1rem; }
-    }
+    @media (max-width: 480px) { .sr-nav-inner { padding: 1rem; } }
 
     </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -164,9 +117,9 @@
       </nav>
     </header>
 
-    <main class="flex-grow max-w-6xl mx-auto px-6 py-10 w-full">
+    <main class="flex-grow max-w-6xl mx-auto px-6 py-10 w-full page-transition">
         
-        <div id="gs-hero" class="bg-[#FFEDF0] rounded-[2rem] p-8 md:p-12 flex flex-col-reverse md:flex-row items-center justify-between mb-16 relative overflow-hidden">
+        <div id="gs-hero" class="sr-hero-card bg-[#FFEDF0] rounded-[2rem] p-8 md:p-12 flex flex-col-reverse md:flex-row items-center justify-between mb-16 relative overflow-hidden">
             <img src="assets/images/img_gs_header-garis.png" alt="Background Pattern" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-90">
             
             <div class="w-full md:w-1/2 flex justify-center mt-8 md:mt-0 relative z-10">
@@ -182,8 +135,8 @@
 
         <div id="gs-profiles" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
             
-            <div class="flex flex-col text-center cursor-pointer group">
-                <div class="relative w-full h-72 md:h-80 p-6 mb-4 flex items-end overflow-hidden transition group-hover:shadow-xl bg-[#FAD5E1]">
+            <a href="profile-detail.html?id=amirah" class="flex flex-col text-center cursor-pointer group transition duration-200 hover:-translate-y-1 hover:shadow-xl no-underline">
+                <div class="relative w-full h-72 md:h-80 p-6 mb-4 flex items-end overflow-hidden bg-[#FAD5E1]">
                     <div class="absolute bottom-6 left-6 right-6 top-6 bg-white overflow-hidden shadow-xs z-10">
                         <img src="assets/images/img_gs_dr-siti-amirah.png" alt="Dr. Siti Amirah" class="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-110">
                         <span class="bg-white text-[#8B1E34] text-[10px] font-bold px-3 py-1 shadow-sm uppercase tracking-wider absolute bottom-4 left-4 z-20">Healthcare</span>
@@ -191,10 +144,10 @@
                 </div>
                 <h3 class="font-extrabold text-xl text-gray-900">Dr. Siti Amirah</h3>
                 <p class="text-[#8B1E34] text-sm font-semibold mt-1">Public Health Advocate</p>
-            </div>
+            </a>
 
-            <div class="flex flex-col text-center cursor-pointer group">
-                <div class="relative w-full h-72 md:h-80 p-6 mb-4 flex items-end overflow-hidden transition group-hover:shadow-xl bg-[#D3F1F6]">
+            <a href="profile-detail.html?id=rania" class="flex flex-col text-center cursor-pointer group transition duration-200 hover:-translate-y-1 hover:shadow-xl no-underline">
+                <div class="relative w-full h-72 md:h-80 p-6 mb-4 flex items-end overflow-hidden bg-[#D3F1F6]">
                     <div class="absolute bottom-6 left-6 right-6 top-6 bg-white overflow-hidden shadow-xs z-10">
                         <img src="assets/images/img_gs_rania-wijaya.png" alt="Rania Wijaya" class="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-110">
                         <span class="bg-white text-[#8B1E34] text-[10px] font-bold px-3 py-1 shadow-sm uppercase tracking-wider absolute bottom-4 left-4 z-20">Education</span>
@@ -202,10 +155,10 @@
                 </div>
                 <h3 class="font-extrabold text-xl text-gray-900">Rania Wijaya</h3>
                 <p class="text-[#8B1E34] text-sm font-semibold mt-1">EdTech Founder</p>
-            </div>
+            </a>
 
-            <div class="flex flex-col text-center cursor-pointer group">
-                <div class="relative w-full h-72 md:h-80 p-6 mb-4 flex items-end overflow-hidden transition group-hover:shadow-xl bg-[#FAD5E1]">
+            <a href="profile-detail.html?id=dian" class="flex flex-col text-center cursor-pointer group transition duration-200 hover:-translate-y-1 hover:shadow-xl no-underline">
+                <div class="relative w-full h-72 md:h-80 p-6 mb-4 flex items-end overflow-hidden bg-[#FAD5E1]">
                     <div class="absolute bottom-6 left-6 right-6 top-6 bg-white overflow-hidden shadow-xs z-10">
                         <img src="assets/images/img_gs_dian-sastro.png" alt="Dian Sastro" class="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-110">
                         <span class="bg-white text-[#8B1E34] text-[10px] font-bold px-3 py-1 shadow-sm uppercase tracking-wider absolute bottom-4 left-4 z-20">Finance</span>
@@ -213,10 +166,10 @@
                 </div>
                 <h3 class="font-extrabold text-xl text-gray-900">Dian Sastro</h3>
                 <p class="text-[#8B1E34] text-sm font-semibold mt-1">FinTech Strategist</p>
-            </div>
+            </a>
 
-            <div class="flex flex-col text-center cursor-pointer group">
-                <div class="relative w-full h-72 md:h-80 p-6 mb-4 flex items-end overflow-hidden transition group-hover:shadow-xl bg-[#D3F1F6]">
+            <a href="profile-detail.html?id=dewi" class="flex flex-col text-center cursor-pointer group transition duration-200 hover:-translate-y-1 hover:shadow-xl no-underline">
+                <div class="relative w-full h-72 md:h-80 p-6 mb-4 flex items-end overflow-hidden bg-[#D3F1F6]">
                     <div class="absolute bottom-6 left-6 right-6 top-6 bg-white overflow-hidden shadow-xs z-10">
                         <img src="assets/images/img_gs_dewi-sari.png" alt="Dewi Sari" class="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-110">
                         <span class="bg-white text-[#8B1E34] text-[10px] font-bold px-3 py-1 shadow-sm uppercase tracking-wider absolute bottom-4 left-4 z-20">Corporate</span>
@@ -224,10 +177,10 @@
                 </div>
                 <h3 class="font-extrabold text-xl text-gray-900">Dewi Sari</h3>
                 <p class="text-[#8B1E34] text-sm font-semibold mt-1">Associate Director</p>
-            </div>
+            </a>
 
-            <div class="flex flex-col text-center cursor-pointer group">
-                <div class="relative w-full h-72 md:h-80 p-6 mb-4 flex items-end overflow-hidden transition group-hover:shadow-xl bg-[#FAD5E1]">
+            <a href="profile-detail.html?id=indah" class="flex flex-col text-center cursor-pointer group transition duration-200 hover:-translate-y-1 hover:shadow-xl no-underline">
+                <div class="relative w-full h-72 md:h-80 p-6 mb-4 flex items-end overflow-hidden bg-[#FAD5E1]">
                     <div class="absolute bottom-6 left-6 right-6 top-6 bg-white overflow-hidden shadow-xs z-10">
                         <img src="assets/images/img_gs_indah-lestari.png" alt="Indah Lestari" class="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-110">
                         <span class="bg-white text-[#8B1E34] text-[10px] font-bold px-3 py-1 shadow-sm uppercase tracking-wider absolute bottom-4 left-4 z-20">Management</span>
@@ -235,10 +188,10 @@
                 </div>
                 <h3 class="font-extrabold text-xl text-gray-900">Indah Lestari</h3>
                 <p class="text-[#8B1E34] text-sm font-semibold mt-1">Human Resources</p>
-            </div>
+            </a>
 
-            <div class="flex flex-col text-center cursor-pointer group">
-                <div class="relative w-full h-72 md:h-80 p-6 mb-4 flex items-end overflow-hidden transition group-hover:shadow-xl bg-[#D3F1F6]">
+            <a href="profile-detail.html?id=maya" class="flex flex-col text-center cursor-pointer group transition duration-200 hover:-translate-y-1 hover:shadow-xl no-underline">
+                <div class="relative w-full h-72 md:h-80 p-6 mb-4 flex items-end overflow-hidden bg-[#D3F1F6]">
                     <div class="absolute bottom-6 left-6 right-6 top-6 bg-white overflow-hidden shadow-xs z-10">
                         <img src="assets/images/img_gs_maya-puteri.png" alt="Maya Puteri" class="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-110">
                         <span class="bg-white text-[#8B1E34] text-[10px] font-bold px-3 py-1 shadow-sm uppercase tracking-wider absolute bottom-4 left-4 z-20">Law</span>
@@ -246,7 +199,7 @@
                 </div>
                 <h3 class="font-extrabold text-xl text-gray-900">Maya Puteri</h3>
                 <p class="text-[#8B1E34] text-sm font-semibold mt-1">Ethics Researcher</p>
-            </div>
+            </a>
 
         </div>
 
@@ -299,15 +252,33 @@
     (function() {
       var toggle = document.getElementById('srNavToggle');
       var links  = document.getElementById('srNavLinks');
-      if (!toggle || !links) return;
-      toggle.addEventListener('click', function() {
-        var open = links.classList.toggle('sr-open');
-        toggle.setAttribute('aria-expanded', open);
-      });
-      document.addEventListener('click', function(e) {
-        if (!toggle.contains(e.target) && !links.contains(e.target)) {
-          links.classList.remove('sr-open');
-          toggle.setAttribute('aria-expanded', 'false');
+      if (toggle && links) {
+        toggle.addEventListener('click', function() {
+          var open = links.classList.toggle('sr-open');
+          toggle.setAttribute('aria-expanded', open);
+        });
+        document.addEventListener('click', function(e) {
+          if (!toggle.contains(e.target) && !links.contains(e.target)) {
+            links.classList.remove('sr-open');
+            toggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      document.body.classList.add('page-visible');
+      var pageLinks = document.querySelectorAll('a[href$=".html"]');
+      pageLinks.forEach(function(link) {
+        if (link.closest('nav')) {
+          link.addEventListener('click', function(event) {
+            var href = link.getAttribute('href');
+            if (!href || href.startsWith('http') || href.startsWith('mailto:')) return;
+            event.preventDefault();
+            document.querySelector('main').classList.add('fade-out');
+            document.body.classList.remove('page-visible');
+            window.setTimeout(function() {
+              window.location.href = href;
+            }, 300);
+          });
         }
       });
     })();

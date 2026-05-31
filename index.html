@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Fonts: Poppins (heading), Inter (body), Plus Jakarta Sans (logo/display) -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <!-- Icons: gunakan class FontAwesome, jangan pakai PNG untuk ikon biasa -->
+  <!-- Icons: FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <script>
@@ -98,7 +98,6 @@
       pointer-events: none;
     }
 
-    /* Wave arch: full-bleed SVG transition dari merah ke putih */
     .wave-arch-svg-wrap {
       margin-top: -1px;
       line-height: 0;
@@ -115,7 +114,6 @@
       vertical-align: bottom;
     }
 
-    /* Ribbon: posisi di area putih, overlap ke atas arch */
     .ribbon-anchor {
       display: flex;
       justify-content: center;
@@ -142,33 +140,30 @@
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* ── Nav link hover underline animation (same as my-record.html) ── */
+    /* Nav link hover */
     .nav-link {
-      color: #be123c;           /* rose-700 */
+      color: #be123c; 
       font-weight: 400;
       border-bottom: 2px solid transparent;
       transition: color 0.2s ease, border-color 0.2s ease;
       text-decoration: none;
     }
     .nav-link:hover {
-      color: #9d174d;           /* pink-800 */
+      color: #9d174d; 
       border-bottom: 2px solid #9d174d;
     }
-    /* Active state (set by JS) */
     .nav-link.active-page,
     .nav-link[aria-current="page"] {
       font-weight: 700;
       color: #9d174d;
       border-bottom: 2px solid #9d174d;
     }
-    /* Mobile nav link hover */
     .nav-link-mobile {
       text-decoration: none;
       transition: color 0.2s ease;
     }
     .nav-link-mobile:hover { color: #9d174d; font-weight: 600; }
 
-    /* Card link wrapper — remove default anchor styling */
     .card-link {
       text-decoration: none;
       color: inherit;
@@ -178,57 +173,52 @@
 </head>
 <body class="antialiased">
 
-  <nav id="main-nav" class="sticky top-0 z-50 bg-white shadow-[0_1px_2px_rgba(65,0,7,0.06)] backdrop-blur-[6px]">
+  <!-- NAVBAR FIXED -->
+  <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-rose-100 shadow-sm">
     <div class="max-w-[1280px] mx-auto px-6 md:px-12 py-4 flex justify-between items-center">
 
-      <a href="index.html"
-         class="font-jakarta font-extrabold text-2xl leading-8 text-rose-800 tracking-tight">
+      <a href="index.html" class="font-jakarta font-extrabold text-2xl leading-8 text-rose-800 tracking-tight">
         SheRise
       </a>
 
       <ul class="hidden md:flex items-center gap-8 list-none m-0 p-0">
         <li><a href="index.html"       data-page="index"       class="nav-link font-body text-base pb-1 transition-all">Home</a></li>
-        <li><a href="girl-spot.html"  data-page="girl-spot"  class="nav-link font-body text-base pb-1 transition-all">Girls Spot</a></li>
+        <li><a href="girl-spot.html"  data-page="girls-spot"  class="nav-link font-body text-base pb-1 transition-all">Girls Spot</a></li>
         <li><a href="my-record.html"   data-page="my-record"   class="nav-link font-body text-base pb-1 transition-all">My Record</a></li>
         <li><a href="career-plan.html" data-page="career-plan" class="nav-link font-body text-base pb-1 transition-all">Career Plan</a></li>
       </ul>
 
       <div class="hidden md:flex">
-        <a href="login.html"
-           class="px-6 py-2 bg-pink-800 rounded-full font-body text-base font-bold text-white hover:opacity-90 transition-opacity">
+        <a href="login.html" class="px-6 py-2 bg-pink-800 rounded-full font-body text-base font-bold text-white hover:opacity-90 transition-opacity">
           Login
         </a>
       </div>
 
-      <button id="hamburger" aria-label="Buka menu" onclick="toggleMenu()"
-              class="md:hidden flex flex-col gap-1.5 p-2">
+      <button id="hamburger" aria-label="Buka menu" onclick="toggleMenu()" class="md:hidden flex flex-col gap-1.5 p-2">
         <span class="w-6 h-0.5 bg-rose-800 block"></span>
         <span class="w-6 h-0.5 bg-rose-800 block"></span>
         <span class="w-6 h-0.5 bg-rose-800 block"></span>
       </button>
     </div>
 
-    <div id="mobile-menu"
-         class="flex-col gap-1 px-6 pb-4 md:hidden bg-white border-t border-pink-100">
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu" class="flex-col gap-1 px-6 pb-4 md:hidden bg-white border-t border-pink-100">
       <a href="index.html"       data-page="index"       class="nav-link-mobile block py-2 font-body text-base text-rose-700">Home</a>
-      <a href="girl-spot.html"  data-page="girl-spot"  class="nav-link-mobile block py-2 font-body text-base text-rose-700">Girls Spot</a>
+      <a href="girls-spot.html"  data-page="girls-spot"  class="nav-link-mobile block py-2 font-body text-base text-rose-700">Girls Spot</a>
       <a href="my-record.html"   data-page="my-record"   class="nav-link-mobile block py-2 font-body text-base text-rose-700">My Record</a>
       <a href="career-plan.html" data-page="career-plan" class="nav-link-mobile block py-2 font-body text-base text-rose-700">Career Plan</a>
-      <a href="login.html"
-         class="mt-2 inline-block bg-pink-800 text-white font-body font-bold text-base px-6 py-2 rounded-full">
+      <a href="login.html" class="mt-2 inline-block bg-pink-800 text-white font-body font-bold text-base px-6 py-2 rounded-full text-center">
         Login
       </a>
     </div>
   </nav>
-
 
   <!-- HERO -->
   <section id="hero" class="hero-bg overflow-hidden">
     <div class="max-w-[1280px] mx-auto px-6 md:px-12 py-16 md:py-24 flex flex-col md:flex-row gap-12 items-center">
 
       <div class="fade-up flex-1 flex flex-col gap-6 order-2 md:order-1">
-        <span class="inline-flex self-start px-4 py-1 bg-red-100/40 rounded-full
-                     font-body text-pink-800 text-sm font-normal leading-6">
+        <span class="inline-flex self-start px-4 py-1 bg-red-100/40 rounded-full font-body text-pink-800 text-sm font-normal leading-6">
           Empowering Indonesian Women
         </span>
 
@@ -244,30 +234,22 @@
         </p>
 
         <div class="flex flex-wrap gap-4 pt-2">
-          <a href="girl-spot.html"
-             class="font-body font-bold text-base px-10 py-4 bg-pink-800 text-white rounded-xl
-                    hover:bg-rose-dark transition-colors">
+          <a href="girls-spot.html" class="font-body font-bold text-base px-10 py-4 bg-pink-800 text-white rounded-xl hover:bg-rose-dark transition-colors">
             Explore Girls Spot
           </a>
-          <a href="my-record.html"
-             class="font-body font-bold text-base px-10 py-4 text-pink-800 rounded-xl
-                    border-2 border-pink-800 hover:bg-rose-soft transition-colors">
+          <a href="my-record.html" class="font-body font-bold text-base px-10 py-4 text-pink-800 rounded-xl border-2 border-pink-800 hover:bg-rose-soft transition-colors">
             Start Recording
           </a>
         </div>
       </div>
 
       <div class="relative flex-shrink-0 flex justify-center order-1 md:order-2">
-        <div class="relative w-[min(88vw,420px)] rounded-3xl overflow-hidden shadow-2xl
-                    outline outline-4 outline-white rotate-[2deg]">
+        <div class="relative w-[min(88vw,420px)] rounded-3xl overflow-hidden shadow-2xl outline outline-4 outline-white rotate-[2deg]">
           <!-- assets/images/img_home_heromain.jpg -->
-          <img src="assets/images/img_home_heromain.jpg" alt="Woman holding a tablet"
-               class="w-full h-full object-cover aspect-[4/5]" />
+          <img src="assets/images/img_home_heromain.jpg" alt="Woman holding a tablet" class="w-full h-full object-cover aspect-[4/5]" />
         </div>
 
-        <div class="milestone-card slide-in
-                    absolute bottom-[-12px] left-[-12px] md:left-[-40px]
-                    w-[min(220px,56vw)]">
+        <div class="milestone-card slide-in absolute bottom-[-12px] left-[-12px] md:left-[-40px] w-[min(220px,56vw)]">
           <div class="flex items-center gap-3 mb-2">
             <span class="w-9 h-9 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
               <i class="fas fa-star text-pink-800 text-xs"></i>
@@ -283,7 +265,6 @@
     </div>
   </section>
 
-
   <!-- STATS -->
   <section aria-label="Statistik partisipasi tenaga kerja" class="bg-white">
     <div class="max-w-[1280px] mx-auto px-6 md:px-12 py-8">
@@ -295,8 +276,7 @@
             <span class="font-bold text-xl text-rose-400 font-heading">56%</span>
           </div>
           <div class="h-3 bg-white/10 rounded-full overflow-hidden">
-            <div class="progress-bar h-full bg-rose-400 rounded-full"
-                 style="--bar-w:56%; width:56%;"></div>
+            <div class="progress-bar h-full bg-rose-400 rounded-full" style="--bar-w:56%; width:56%;"></div>
           </div>
         </div>
 
@@ -306,8 +286,7 @@
             <span class="font-bold text-xl font-heading">80%</span>
           </div>
           <div class="h-3 bg-white/20 rounded-full overflow-hidden">
-            <div class="progress-bar h-full bg-white/70 rounded-full"
-                 style="--bar-w:80%; width:80%;"></div>
+            <div class="progress-bar h-full bg-white/70 rounded-full" style="--bar-w:80%; width:80%;"></div>
           </div>
         </div>
 
@@ -315,19 +294,16 @@
     </div>
   </section>
 
-
   <!-- MISSION -->
   <section id="mission" class="bg-white py-20 reveal">
-    <div class="max-w-[1280px] mx-auto px-6 md:px-12
-                flex flex-col md:flex-row gap-14 items-center">
+    <div class="max-w-[1280px] mx-auto px-6 md:px-12 flex flex-col md:flex-row gap-14 items-center">
 
       <div class="flex-1 flex flex-col gap-6">
         <p class="font-heading font-bold text-sm text-pink-800 tracking-wide uppercase">
           The Bridge We're Building Together
         </p>
 
-        <h2 class="font-heading font-bold text-3xl md:text-4xl lg:text-5xl leading-tight"
-            style="color:#94062A;">
+        <h2 class="font-heading font-bold text-3xl md:text-4xl lg:text-5xl leading-tight" style="color:#94062A;">
           Our Goal Closing the gap through structured mentorship and personal achievement tracking.
         </h2>
 
@@ -358,8 +334,7 @@
         <div class="group-photo-wrapper">
           <div class="group-photo-circle">
             <!-- assets/images/img_home_community.jpg -->
-            <img src="assets/images/img_home_community.jpg" alt="Komunitas SheRise"
-                 class="w-full h-full object-cover" />
+            <img src="assets/images/img_home_community.jpg" alt="Komunitas SheRise" class="w-full h-full object-cover" />
           </div>
           <div class="deco-icon deco-icon--tl" aria-hidden="true">
             <!-- assets/icons/img_home_iconbunga.png -->
@@ -375,7 +350,6 @@
     </div>
   </section>
 
-
   <!-- QUOTE -->
   <div style="background-color:#B90834;" class="overflow-hidden">
     <section aria-label="Kutipan inspirasi" class="pt-20 pb-6 px-6 reveal">
@@ -383,8 +357,7 @@
 
         <div class="w-20 h-20 rounded-full overflow-hidden border-4 border-rose-dark shadow-lg flex-shrink-0">
           <!-- assets/images/img_home_srimulyani.jpg -->
-          <img src="assets/images/img_home_srimulyani.jpg" alt="Sri Mulyani Indrawati"
-               class="w-full h-full object-cover" />
+          <img src="assets/images/img_home_srimulyani.jpg" alt="Sri Mulyani Indrawati" class="w-full h-full object-cover" />
         </div>
 
         <blockquote class="font-heading font-semibold italic text-xl md:text-2xl leading-10 text-rose-100">
@@ -399,7 +372,6 @@
       </div>
     </section>
 
-    <!-- Wave arch: SVG full-bleed merah → putih, preserveAspectRatio="none" biar selalu edge-to-edge -->
     <div class="wave-arch-svg-wrap" aria-hidden="true">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 130" preserveAspectRatio="none">
         <path d="M0,130 C0,130 360,0 720,0 C1080,0 1440,130 1440,130 Z" fill="#ffffff" />
@@ -408,12 +380,11 @@
 
   </div>
 
-  <!-- Ribbon: di luar container merah supaya tidak ter-clip overflow:hidden -->
+  <!-- Ribbon -->
   <!-- assets/images/img_home_pita.png -->
   <div class="ribbon-anchor" aria-hidden="true">
     <img src="assets/images/img_home_pita.png" alt="" />
   </div>
-
 
   <!-- FEATURES -->
   <section id="features" class="bg-white pb-24 pt-6 px-6 reveal">
@@ -435,8 +406,7 @@
         <article class="feature-card rounded-2xl overflow-hidden border border-rose-muted shadow-sm cursor-pointer bg-white">
           <div class="relative overflow-hidden">
             <!-- assets/images/img_home_careerplan.jpg -->
-            <img src="assets/images/img_home_careerplan.jpg" alt="Career Plan"
-                 class="w-full aspect-video object-cover" />
+            <img src="assets/images/img_home_careerplan.jpg" alt="Career Plan" class="w-full aspect-video object-cover" />
             <div class="absolute inset-0 bg-gradient-to-t from-rose-950/60 to-transparent flex items-end p-4">
               <span class="text-5xl" aria-hidden="true">💼</span>
             </div>
@@ -450,12 +420,11 @@
         </article>
         </a>
 
-        <a href="girl-spot.html" class="card-link">
+        <a href="girls-spot.html" class="card-link">
         <article class="feature-card rounded-2xl overflow-hidden border border-rose-muted shadow-sm cursor-pointer bg-white">
           <div class="relative overflow-hidden">
             <!-- assets/images/img_home_girlspotlight.jpg -->
-            <img src="assets/images/img_home_girlspotlight.jpg" alt="Girl Spotlight"
-                 class="w-full aspect-video object-cover" />
+            <img src="assets/images/img_home_girlspotlight.jpg" alt="Girl Spotlight" class="w-full aspect-video object-cover" />
             <div class="absolute inset-0 bg-gradient-to-t from-rose-950/60 to-transparent flex items-end p-4">
               <span class="text-5xl" aria-hidden="true">✨</span>
             </div>
@@ -473,8 +442,7 @@
         <article class="feature-card rounded-2xl overflow-hidden border border-rose-muted shadow-sm cursor-pointer bg-white">
           <div class="relative overflow-hidden">
             <!-- assets/images/img_home_recordtrack.jpg -->
-            <img src="assets/images/img_home_recordtrack.jpg" alt="Record Track"
-                 class="w-full aspect-video object-cover" />
+            <img src="assets/images/img_home_recordtrack.jpg" alt="Record Track" class="w-full aspect-video object-cover" />
             <div class="absolute inset-0 bg-gradient-to-t from-rose-950/60 to-transparent flex items-end p-4">
               <span class="text-5xl" aria-hidden="true">✍🏻</span>
             </div>
@@ -492,12 +460,8 @@
     </div>
   </section>
 
-
   <!-- CTA -->
-  <section aria-label="Call to action"
-           style="background: linear-gradient(to right, #9B1B4B, #B90834);"
-           class="py-24 px-6 relative overflow-hidden reveal">
-
+  <section aria-label="Call to action" style="background: linear-gradient(to right, #9B1B4B, #B90834);" class="py-24 px-6 relative overflow-hidden reveal">
     <div class="cta-circle opacity-20" style="left:-130px; top:50%; transform:translateY(-50%);"></div>
     <div class="cta-circle opacity-15" style="right:-130px; top:50%; transform:translateY(-50%);"></div>
 
@@ -509,53 +473,39 @@
         Join a community of thousands of Indonesian women who are taking charge of their
         careers through intentional tracking and support.
       </p>
-      <a href="#"
-         class="font-body font-bold text-pink-800 text-xl md:text-2xl
-                px-12 py-5 bg-white rounded-full shadow-lg hover:bg-rose-soft transition-colors">
+      <a href="#" class="font-body font-bold text-pink-800 text-xl md:text-2xl px-12 py-5 bg-white rounded-full shadow-lg hover:bg-rose-soft transition-colors">
         Get Started Now
       </a>
     </div>
   </section>
 
-
   <!-- FOOTER -->
-  <footer class="bg-rose-950 text-white">
-    <div class="max-w-[1280px] mx-auto px-6 md:px-12 py-12
-                border-t border-stone-300/20
-                flex flex-col md:flex-row justify-between items-start gap-10">
-
-      <div class="flex flex-col gap-3 max-w-xs">
-        <p class="font-jakarta font-bold text-2xl text-red-100">SheRise</p>
-        <p class="font-body text-sm text-red-100/80 leading-6">
-          © 2024 SheRise. Empowering every woman to track her journey and own her story.
-        </p>
-      </div>
-
-      <nav aria-label="Footer links" class="flex flex-col sm:flex-row gap-y-2 gap-x-12 font-body">
-        <a href="privacy.html"   class="text-base text-red-100/80 hover:text-white transition-colors">Privacy Policy</a>
-        <a href="terms.html"     class="text-base text-red-100/80 hover:text-white transition-colors">Terms of Service</a>
-        <a href="#"              class="text-base text-red-100/80 hover:text-white transition-colors">Contact Us</a>
-        <a href="resources.html" class="text-base text-red-100/80 hover:text-white transition-colors">Resources</a>
-      </nav>
-
-      <div class="flex items-center gap-4">
-        <a href="#" aria-label="Instagram"
-           class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-colors">
-          <i class="fab fa-instagram text-sm"></i>
-        </a>
-        <a href="#" aria-label="Twitter / X"
-           class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-colors">
-          <i class="fab fa-x-twitter text-sm"></i>
-        </a>
-        <a href="#" aria-label="LinkedIn"
-           class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-colors">
-          <i class="fab fa-linkedin-in text-sm"></i>
-        </a>
-      </div>
-
-    </div>
-  </footer>
-
+ <footer class="bg-[#21050B] text-rose-100/70 text-xs py-12 px-6 md:px-16 border-t border-rose-950 mt-auto">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div class="md:col-span-6 space-y-3">
+                <div class="font-poppins text-xl font-bold text-white tracking-tight">SheRise</div>
+                <p class="max-w-sm leading-relaxed text-rose-200/50">&copy; 2026 SheRise. Empowering every woman to track her journey and own her story.</p>
+            </div>
+            <div class="md:col-span-6 grid grid-cols-3 gap-4 text-left">
+                <div class="space-y-2">
+                    <span class="font-bold text-white block mb-1 text-xs">Platform</span>
+                    <a href="privacy.html" class="block hover:text-white transition">Privacy Policy</a>
+                    <a href="terms.html" class="block text-white hover:text-white transition">Terms of Service</a>
+                </div>
+                <div class="space-y-2">
+                    <span class="font-bold text-white block mb-1 text-xs">Support</span>
+                    <a href="mailto:haisyahrlaf@student.ub.ac.id" class="block hover:text-white transition">Contact Us</a>
+                    <a href="resources.html" class="block hover:text-white transition">Resources</a>
+                </div>
+                <div class="space-y-2">
+                    <span class="font-bold text-white block mb-1 text-xs">Follow Us</span>
+                    <a href="https://www.instagram.com/sherise_careerempower/" target="_blank" rel="noopener noreferrer" class="flex items-center hover:text-white transition">
+                        <i class="fab fa-instagram text-base"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
   <script>
     function toggleMenu() {
