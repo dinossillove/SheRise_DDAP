@@ -4,59 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Service - SheRise</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              rose: {
+                50: '#fff1f2', 100: '#ffe4ec', 200: '#f8c5d3', 300: '#f0a0b7',
+                400: '#e06e94', 500: '#c42f5c', 600: '#9d174d', 700: '#701337', 800: '#4a0e27',
+              }
+            },
+            fontFamily: {
+              heading: ['Poppins', 'sans-serif'],
+              body: ['Inter', 'sans-serif'],
+              logo: ['Plus Jakarta Sans', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    
     <style>
-        /* Import font Inter (Body) dan Poppins (Heading) dari Google Fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@800&display=swap');
         
-        /* Default body pakai Inter */
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FFF9F8;
+            margin: 0; min-height: 100vh; font-family: 'Inter', sans-serif;
+            background: #FFF9F8; color: #1f2937; opacity: 0; transition: opacity .35s ease;
         }
+        body.page-visible { opacity: 1; }
+        h1, h2, h3, h4, h5, h6, .font-poppins { font-family: 'Poppins', sans-serif; }
+        a { color: inherit; }
+        .page-transition { transition: opacity .35s ease, transform .35s ease; }
+        .page-transition.fade-out { opacity: 0; transform: translateY(12px); }
         
-        /* Semua heading otomatis pakai Poppins */
-        h1, h2, h3, h4, h5, h6, .font-poppins {
-            font-family: 'Poppins', sans-serif;
+        /* ================= CSS NAVBAR ================= */
+        .sr-header { position: sticky; top: 0; z-index: 200; background: #ffffff; backdrop-filter: blur(8px); box-shadow: 0 1px 2px rgba(65,0,7,0.06); }
+        .sr-nav-inner { width: 100%; max-width: 1280px; margin: 0 auto; padding: 1rem 3rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .sr-nav-logo { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1.5rem; line-height: 2rem; color: #9d174d; text-decoration: none; }
+        .sr-nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; margin: 0; padding: 0; }
+        .sr-nav-links a { font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 500; line-height: 1.5rem; color: #be123c; padding-bottom: 4px; border-bottom: 2px solid transparent; transition: color .2s ease, border-color .2s ease, transform .2s ease; text-decoration: none; }
+        .sr-nav-links a:hover { color: #9d174d; border-bottom-color: #9d174d; transform: translateY(-1px); }
+        .sr-nav-links a.sr-active { font-weight: 700; color: #9d174d; border-bottom-color: #9d174d; }
+        .sr-nav-login { display: inline-flex; align-items: center; justify-content: center; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem; color: #ffffff; background: #9d174d; padding: 0.75rem 1.5rem; border-radius: 9999px; transition: background .2s ease, transform .2s ease; text-decoration: none; }
+        .sr-nav-login:hover { background: #701337; transform: translateY(-1px); }
+        .sr-nav-toggle { display: none; flex-direction: column; gap: 4px; padding: 0.5rem; border: none; background: none; cursor: pointer; }
+        .sr-nav-toggle span { display: block; width: 24px; height: 2px; background: #9d174d; border-radius: 9999px; transition: all .3s ease; }
+        .sr-footer a { color: inherit; text-decoration: none; transition: color .2s ease; }
+        .sr-footer a:hover { color: #ffffff; }
+        
+        @media (max-width: 1024px) { .sr-nav-inner { padding: 1rem 1.5rem; } }
+        @media (max-width: 768px) {
+          .sr-nav-links { display: none; flex-direction: column; align-items: flex-start; gap: 1rem; position: absolute; top: 100%; left: 0; right: 0; background: white; padding: 1.5rem; box-shadow: 0 18px 32px rgba(0,0,0,0.08); z-index: 99; }
+          .sr-nav-links.sr-open { display: flex; }
+          .sr-nav-login { display: none; }
+          .sr-nav-toggle { display: flex; }
+          .sr-header { position: relative; }
         }
+        @media (max-width: 480px) { .sr-nav-inner { padding: 1rem; } }
     </style>
 </head>
 <body class="text-gray-800 antialiased flex flex-col min-h-screen">
 
-    <nav class="bg-white border-b border-rose-100 py-4 px-6 md:px-16 flex justify-between items-center sticky top-0 z-50 shadow-xs">
-        <div class="font-poppins text-2xl font-extrabold text-[#8B1E34] tracking-tight">SheRise</div>
-        <div class="hidden md:flex space-x-8 font-semibold text-gray-500 text-sm">
-            <a href="index.html" class="hover:text-[#8B1E34] transition">Home</a>
-            <a href="girl-spot.html" class="hover:text-[#8B1E34] transition">Girls Spot</a>
-            <a href="my-record.html" class="hover:text-[#8B1E34] transition">My Record</a>
-            <a href="career-plan.html" class="hover:text-[#8B1E34] transition">Career Plan</a>
+    <!-- HEADER SESUAI TEMPLATE -->
+    <header class="sr-header">
+      <nav class="sr-nav-inner" aria-label="Main navigation">
+        <a href="index.html" class="sr-nav-logo">SheRise</a>
+        <ul class="sr-nav-links" id="srNavLinks" role="list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="girl-spot.html">Girls Spot</a></li>
+          <li><a href="my-record.html">My Record</a></li>
+          <li><a href="career-plan.html">Career Plan</a></li>
+        </ul>
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <a href="login.html" class="sr-nav-login">Login</a>
+          <button class="sr-nav-toggle" id="srNavToggle" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
         </div>
-        <button class="bg-[#8B1E34] text-white px-7 py-2 rounded-full font-semibold text-sm hover:bg-[#6B1525] transition shadow-xs cursor-pointer">Login</button>
-    </nav>
+      </nav>
+    </header>
 
-    <main class="flex-grow max-w-3xl mx-auto px-6 py-12 md:py-20">
+    <!-- KONTEN TERMS OF SERVICE -->
+    <main class="flex-grow max-w-3xl mx-auto px-6 py-12 md:py-20 page-transition w-full">
         <div class="mb-10 border-b border-rose-200 pb-8">
             <h1 class="text-3xl md:text-5xl font-extrabold text-[#8B1E34] mb-4">Terms of Service & Project Manifesto</h1>
             <p class="text-gray-500 font-medium text-base">Laporan Diskusi Kelompok - Dasar Desain Antarmuka Pengguna</p>
         </div>
 
-        <div class="space-y-8 text-gray-700 leading-relaxed text-base">
+        <div class="space-y-8 text-gray-700 leading-relaxed text-base font-body">
             
             <section>
-                <h2 class="text-xl font-bold text-gray-900 mb-3">1. Tentang Platform Ini</h2>
+                <h2 class="text-xl font-bold text-gray-900 mb-3 font-poppins">1. Tentang Platform Ini</h2>
                 <p>Selamat datang di SheRise. Platform ini mengusung tagline "Track your Journey, Own your Story". SheRise adalah sebuah platform berbasis web yang bertujuan untuk membantu perempuan muda dalam melacak perjalanan pengembangan diri, meningkatkan kepercayaan diri, serta mempersiapkan diri menghadapi dunia karier secara lebih terstruktur.</p>
             </section>
 
             <section>
-                <h2 class="text-xl font-bold text-gray-900 mb-3">2. Latar Belakang & Visi Proyek</h2>
+                <h2 class="text-xl font-bold text-gray-900 mb-3 font-poppins">2. Latar Belakang & Visi Proyek</h2>
                 <p>Pengembangan platform ini didasari oleh realitas kesenjangan gender di dunia kerja, di mana tingkat partisipasi angkatan kerja perempuan berada di kisaran 56%, sementara laki-laki mencapai lebih dari 80%. Selain itu, perempuan muda kerap menghadapi tantangan <em>impostor syndrome</em> akibat kurangnya wadah yang terstruktur untuk mendokumentasikan pencapaian dan akses terhadap <em>role model</em> yang relevan.</p>
                 <p class="mt-3">Oleh karena itu, kami menyepakati pengembangan fitur-fitur utama seperti <strong>Girls Spot</strong> untuk menampilkan profil tokoh perempuan inspiratif, <strong>My Record</strong> sebagai wadah dokumentasi prestasi, dan <strong>Career Plan</strong> untuk memantau peluang karier.</p>
             </section>
 
             <section class="bg-white p-6 rounded-2xl shadow-sm border border-rose-100">
-                <h2 class="text-xl font-bold text-[#8B1E34] mb-4"><i class="fas fa-users mr-2"></i> Tim Pengembang (The Creators)</h2>
+                <h2 class="text-xl font-bold text-[#8B1E34] mb-4 font-poppins"><i class="fas fa-users mr-2"></i> Tim Pengembang (The Creators)</h2>
                 <p class="mb-4">Platform antarmuka ini dirancang dan dikembangkan dengan penuh dedikasi oleh kelompok mahasiswa Universitas Brawijaya (2026):</p>
                 <ul class="space-y-3">
                     <li class="flex items-center">
@@ -84,7 +137,7 @@
             </section>
 
             <section>
-                <h2 class="text-xl font-bold text-gray-900 mb-3">3. Konteks Akademik</h2>
+                <h2 class="text-xl font-bold text-gray-900 mb-3 font-poppins">3. Konteks Akademik</h2>
                 <p>Dokumen desain dan implementasi antarmuka ini disusun sebagai pemenuhan proyek mata kuliah Dasar Desain Antarmuka Pengguna, Fakultas Ilmu Komputer, Universitas Brawijaya. Seluruh proses perancangan berpedoman pada arahan Dosen Pengampu, Bapak Riswan Septriayadi Sianturi, S.Si., M.M., M.Sc., Ph.D..</p>
                 <p class="mt-3 font-medium italic text-gray-600">"Kelompok berkomitmen untuk menghasilkan produk yang substantif dan memberikan dampak positif bagi komunitas perempuan muda."</p>
             </section>
@@ -92,17 +145,20 @@
         </div>
     </main>
 
-    <footer class="bg-[#21050B] text-rose-100/70 text-xs py-12 px-6 md:px-16 border-t border-rose-950 mt-auto">
+    <!-- FOOTER SESUAI TEMPLATE -->
+    <footer id="gs-footer" class="bg-[#21050B] text-rose-100/70 text-xs py-12 px-6 md:px-16 border-t border-rose-950 mt-auto">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8">
             <div class="md:col-span-6 space-y-3">
                 <div class="font-poppins text-xl font-bold text-white tracking-tight">SheRise</div>
-                <p class="max-w-sm leading-relaxed text-rose-200/50">&copy; 2026 SheRise. Empowering every woman to track her journey and own her story.</p>
+                <p class="max-w-sm leading-relaxed text-rose-200/50">
+                    &copy; 2026 SheRise. Empowering every woman to track her journey and own her story.
+                </p>
             </div>
             <div class="md:col-span-6 grid grid-cols-3 gap-4 text-left">
                 <div class="space-y-2">
                     <span class="font-bold text-white block mb-1 text-xs">Platform</span>
                     <a href="privacy.html" class="block hover:text-white transition">Privacy Policy</a>
-                    <a href="terms.html" class="block text-white hover:text-white transition">Terms of Service</a>
+                    <a href="terms.html" class="block hover:text-white transition">Terms of Service</a>
                 </div>
                 <div class="space-y-2">
                     <span class="font-bold text-white block mb-1 text-xs">Support</span>
@@ -112,11 +168,48 @@
                 <div class="space-y-2">
                     <span class="font-bold text-white block mb-1 text-xs">Follow Us</span>
                     <a href="https://www.instagram.com/sherise_careerempower/" target="_blank" rel="noopener noreferrer" class="flex items-center hover:text-white transition">
-                        <i class="fab fa-instagram text-base"></i>
+                        <i class="fab fa-instagram"></i>
                     </a>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!-- SCRIPT JS UNTUK NAVBAR DAN TRANSISI -->
+    <script>
+      (function() {
+        var toggle = document.getElementById('srNavToggle');
+        var links  = document.getElementById('srNavLinks');
+        if (toggle && links) {
+          toggle.addEventListener('click', function() {
+            var open = links.classList.toggle('sr-open');
+            toggle.setAttribute('aria-expanded', open);
+          });
+          document.addEventListener('click', function(e) {
+            if (!toggle.contains(e.target) && !links.contains(e.target)) {
+              links.classList.remove('sr-open');
+              toggle.setAttribute('aria-expanded', 'false');
+            }
+          });
+        }
+
+        document.body.classList.add('page-visible');
+        var pageLinks = document.querySelectorAll('a[href$=".html"]');
+        pageLinks.forEach(function(link) {
+          if (link.closest('nav')) {
+            link.addEventListener('click', function(event) {
+              var href = link.getAttribute('href');
+              if (!href || href.startsWith('http') || href.startsWith('mailto:')) return;
+              event.preventDefault();
+              document.querySelector('main').classList.add('fade-out');
+              document.body.classList.remove('page-visible');
+              window.setTimeout(function() {
+                window.location.href = href;
+              }, 300);
+            });
+          }
+        });
+      })();
+    </script>
 </body>
 </html>
